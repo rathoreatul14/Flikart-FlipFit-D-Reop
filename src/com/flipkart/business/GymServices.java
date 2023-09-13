@@ -1,13 +1,17 @@
 package com.flipkart.business;
 
-public class GymServices {
-    public boolean viewSlots(){
-    	
-    	return true;
+public class GymServices implements GymServicesInterface{
 
-    }
+	@Override
+	public boolean viewSlots() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
-    public boolean viewBookings(){
-        return true;
-    }
+	@Override
+	public boolean viewBookings() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+    
 }

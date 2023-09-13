@@ -1,17 +1,19 @@
 package com.flipkart.business;
 
-public class WaitListServices {
-	
-	
-    public boolean addInWaitList(){
-		return true;
+public class WaitListServices implements WaitListServicesInterface{
 
-    }
-    
-    public boolean removeFromWaitList(){
-		return true;
+	@Override
+	public boolean addInWaitList() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
-    }
+	@Override
+	public boolean removeFromWaitList() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
     
     
 }
