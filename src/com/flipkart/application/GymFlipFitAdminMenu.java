@@ -2,7 +2,7 @@ package com.flipkart.application;
 
 public class GymFlipFitAdminMenu {
 
-    public static void run() {
+    public void run(Scanner in) {
         System.out.println("Admin menu");
 //        Scanner in = new Scanner(System.in);
 //

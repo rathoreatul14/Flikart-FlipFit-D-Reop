@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 public class GymFlipFitGymOwnerMenu {
 
-    public static void run() {
-        Scanner in = new Scanner(System.in);
+    public void run(Scanner in) {
         System.out.println("Gym Owner menu");
 //        System.out.println("Press 1 for Login, 2 for Signup, 3 for TataByeBye");
 //        int option = in.nextInt();

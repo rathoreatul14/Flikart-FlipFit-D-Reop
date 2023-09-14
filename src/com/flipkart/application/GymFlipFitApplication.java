@@ -2,35 +2,61 @@ package com.flipkart.application;
 
 import java.util.Scanner;
 
-
 public class GymFlipFitApplication {
 
 	public static void main(String[] args) {
+		System.out.println("\nWelcome to FlipFit Gym Application");
 		Scanner in = new Scanner(System.in);
+		int choice = 1;
 
-		System.out.println("Press 1 for Login, 2 for Signup, 3 for TataByeBye");
-		int option = in.nextInt();
-		switch(option) {
-			case 1:
-				System.out.print("Enter your name: ");
-				String name = in.next();
-				System.out.println("Enter your password");
-				String password = in.next();
-				System.out.println("Enter your role");
-				String role = in.next();
-				switch (role) {
-					case "admin":
-						GymFlipFitAdminMenu.run();
+		while (choice != 5) {
+
+			System.out.println("\nMenu:-");
+			System.out.println("\t1. Login\n"
+					+ "\t2. GymOwner Menu\n"
+					+ "\t3. Customer Menu>\n"
+					+ "\t4. Admin Menu"
+					+ "\t4. Exit\n");
+
+			System.out.print("$ Enter your choice: ");
+
+			try {
+				choice = in.nextInt();
+				in.nextLine(); // Consume the newline character after reading the integer
+
+				switch (choice) {
+					case 1:
+						System.out.println("");
+						openLoginMenu(in);
 						break;
-					case "customer":
-						GymFlipFitCustomerMenu.run();
+
+					case 2:
+						GymFlipFitAdminMenu admin = new GymFlipFitAdminMenu();
+						admin.run(in);
 						break;
-					case "gymowner":
-						GymFlipFitGymOwnerMenu.run();
+
+					case 3:
+						GymFlipFitCustomerMenu customer = new GymFlipFitCustomerMenu();
+						customer.run(in);
 						break;
+
+					case 4:
+						GymFlipFitGymOwnerMenu gymOwner = new GymFlipFitGymOwnerMenu();
+						gymOwner.run(in);
+						break;
+					case 5:
+						break;
+
+					default:
+						System.out.println("Invalid Credentials");
 				}
-				break;
+			}
 		}
+		in.close();
 	}
 
+	public void openLoginMenu(Scanner in){
+		// Login check
+		System.out.println("Login Function Started");
+	}
 }
