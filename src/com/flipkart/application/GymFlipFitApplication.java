@@ -1,17 +1,36 @@
 package com.flipkart.application;
 
 import java.time.LocalDate;
+<<<<<<< Updated upstream
 import java.util.HashMap;
 import java.util.Scanner;
 
 import com.flipkart.bean.Booking;
+=======
+import java.util.*;
+
+>>>>>>> Stashed changes
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.User;
 
+
 public class GymFlipFitApplication {
 
 	public static void main(String[] args) {
+		
+		//
+		
+		
+		HashMap<Integer, Customer> customer = new HashMap<>();
+		HashMap<Integer, Gym> gym = new HashMap<>();
+		
+		
+		
+		//
+		
+		
+		
 		System.out.println("\nWelcome to FlipFit Gym Application");
 		Scanner in = new Scanner(System.in);
 		int choice = 1;
