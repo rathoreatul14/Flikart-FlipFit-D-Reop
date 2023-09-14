@@ -63,7 +63,7 @@ public class GymFlipFitCustomerMenu {
 					customerService.viewBookings(customer, bookings);
 					break;
 				case 4:
-					customerService.viewGyms(customer, gyms);
+					customerService.viewGyms(gyms);
 					break;
 				case 5:
 					System.out.println("Exit!!");
