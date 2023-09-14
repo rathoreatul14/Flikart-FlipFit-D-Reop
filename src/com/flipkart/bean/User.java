@@ -1,12 +1,27 @@
 package com.flipkart.bean;
 
 public class User {
+	
+	
 	private int userID;
 	private String name;
 	private String address;
 	private String email;
 	private String role;
 	private String password;
+	
+	
+	public User(int userID, String name, String address, String email, String role, String password) {
+		super();
+		this.userID = userID;
+		this.name = name;
+		this.address = address;
+		this.email = email;
+		this.role = role;
+		this.password = password;
+	}
+
+	
 
 	public int getUserID() {
 		return userID;

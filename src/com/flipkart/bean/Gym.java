@@ -7,6 +7,22 @@ public class Gym {
 
 	private int gymID;
 	private int gymName;
+	private List<Integer> slotIDs = new ArrayList();
+	private String registerStatus;
+	private int gymOwnerID;
+	
+	
+	public Gym(int gymID, int gymName, List<Integer> slotIDs, String registerStatus, int gymOwnerID) {
+		super();
+		this.gymID = gymID;
+		this.gymName = gymName;
+		this.slotIDs = slotIDs;
+		this.registerStatus = registerStatus;
+		this.gymOwnerID = gymOwnerID;
+	}
+	
+	
+	
 	public int getGymName() {
 		return gymName;
 	}
@@ -23,9 +39,7 @@ public class Gym {
 		this.gymOwnerID = gymOwnerID;
 	}
 
-	private List<Integer> slotIDs = new ArrayList();
-	private String registerStatus;
-	private int gymOwnerID;
+	
 
 	public int getGymID() {
 		return gymID;
