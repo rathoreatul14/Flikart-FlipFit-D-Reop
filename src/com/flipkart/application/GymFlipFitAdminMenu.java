@@ -1,5 +1,7 @@
 package com.flipkart.application;
 
+import java.util.Scanner;
+
 public class GymFlipFitAdminMenu {
 
     public void run(Scanner in) {
