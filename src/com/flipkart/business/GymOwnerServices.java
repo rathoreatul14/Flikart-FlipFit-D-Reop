@@ -2,9 +2,7 @@ package com.flipkart.business;
 
 
 public class GymOwnerServices {
-<<<<<<< Updated upstream
-=======
-	
+
 	
 	public void viewProfile() {
 		
@@ -30,5 +28,4 @@ public class GymOwnerServices {
 	}
 	
 
->>>>>>> Stashed changes
 }

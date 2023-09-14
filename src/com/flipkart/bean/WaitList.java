@@ -35,3 +35,4 @@ public class WaitList {
         this.slotId = slotId;
     }
 }
+
