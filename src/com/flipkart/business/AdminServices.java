@@ -16,15 +16,15 @@ public class AdminServices implements AdminServicesInterface{
 	}
 
 	@Override
-	public void approveGymOwner() {
+	public boolean approveGymOwner(String id) {
 		// TODO Auto-generated method stub
-		
+		return true;
 	}
 
 	@Override
-	public void approveGym() {
+	public boolean approveGym(String id) {
 		// TODO Auto-generated method stub
-		
+		return true;
 	}
 
 	@Override
@@ -39,6 +39,16 @@ public class AdminServices implements AdminServicesInterface{
 		
 	}
 	
+	@Override
+	public void viewAllGyms() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void viewAllGymOwners() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

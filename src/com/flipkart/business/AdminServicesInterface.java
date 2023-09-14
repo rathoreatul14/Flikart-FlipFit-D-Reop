@@ -12,12 +12,16 @@ public interface AdminServicesInterface {
 	
 	public void updateProfile();
 	
-	public void approveGymOwner();
+	public boolean approveGymOwner(String id);
 	
-	public void approveGym();
+	public boolean approveGym(String id);
 	
 	public void viewPendingGymOwner();
 	
 	public void viewPendingGym();
+	
+	public void viewAllGyms();
+	
+	public void viewAllGymOwners();
 
 }
