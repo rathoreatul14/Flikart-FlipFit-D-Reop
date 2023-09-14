@@ -1,6 +1,13 @@
 package com.flipkart.application;
 
+import java.util.HashMap;
 import java.util.Scanner;
+
+import com.flipkart.bean.Booking;
+import com.flipkart.bean.Customer;
+import com.flipkart.bean.Gym;
+import com.flipkart.business.CustomerServices;
+import com.flipkart.business.CustomerServicesInterface;
 
 public class GymFlipFitCustomerMenu {
 
@@ -24,6 +31,49 @@ public class GymFlipFitCustomerMenu {
 //                    GYMFlipFitAdminMenu();
 //            }
 //        }
+        
+        
     }
+    
+    public void customerActionPage(Scanner in, Customer customer, HashMap<Integer, Booking> bookings, HashMap<Integer, Gym> gyms) {
+		System.out.println("\nWelcome to FlipFit Customer Application");
+		CustomerServicesInterface customerService = new CustomerServices();
+
+		int choice = 0;
+		while (choice != 10) {
+			System.out.println("\nMenu:-");
+			System.out.println("\t1.View Profile\n" 
+							+ "\t2.Update Profile\n" 
+							+ "\t3.View Bookings\n"
+							+ "\t4.View Gyms\n"
+							+ "\t5.Exit");
+
+			System.out.print("$ Enter your choice: ");
+			choice = in.nextInt();
+
+			switch (choice) {
+				// Case statements
+				case 1:
+					customerService.viewProfile(customer);
+					break;
+				case 2:
+					customerService.updateProfile(customer);
+					break;
+				case 3:
+					customerService.viewBookings(customer, bookings);
+					break;
+				case 4:
+					customerService.viewGyms(customer, gyms);
+					break;
+				case 5:
+					System.out.println("Exit!!");
+					break;
+				// Default case statement
+				default:
+					System.out.println("Incorrect choice!!! Please try again!!!");
+			}
+		}
+	}
+
 
 }

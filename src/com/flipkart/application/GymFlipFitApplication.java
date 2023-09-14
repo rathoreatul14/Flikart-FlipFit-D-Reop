@@ -1,8 +1,12 @@
 package com.flipkart.application;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Scanner;
 
+import com.flipkart.bean.Booking;
+import com.flipkart.bean.Customer;
+import com.flipkart.bean.Gym;
 import com.flipkart.bean.User;
 
 public class GymFlipFitApplication {
@@ -55,35 +59,47 @@ public class GymFlipFitApplication {
 		in.close();
 	}
 
-	public static void openLoginMenu(Scanner in) {
-		// Login check
+	public static void openLoginMenu(Scanner in, HashMap<Integer, Customer> customers, HashMap<Integer, Booking> bookings, HashMap<Integer, Gym> gyms, HashMap<Integer, User> users) {
+		// Login check users
 		System.out.println("\nEnter your login credentials:-");
 		
 		System.out.print("$ UserId: ");
-		String userName = in.next();
+		int userID = in.nextInt();
 		
 		System.out.print("$ Password: ");
 		String password = in.next();
 		
+		
 		// authenticate
 		// hard coded right now
-		int role = 1;
-		LocalDate localDate = LocalDate.now();
-		System.out.println(localDate.getDayOfMonth() + "/" + localDate.getMonth() + "/" + localDate.getYear());
-		System.out.println("Hello!! " + userName + "\nWelcome to GMS");
+	
+		if(!users.containsKey(userID)) {
+			System.out.println("Invalid Credentials");
+			return;
+			
+		}
+		User user = users.get(userID);
+		
+		
+		String role = user.getRole();
+//		LocalDate localDate = LocalDate.now();
+//		System.out.println(localDate.getDayOfMonth() + "/" + localDate.getMonth() + "/" + localDate.getYear());
+		System.out.println("Hello!! " + "\nWelcome to GMS");
 		
 		switch (role) {
-			case 1: 
+			case "admin": 
 				GymFlipFitAdminMenu admin = new GymFlipFitAdminMenu();
 				admin.adminActionPage(in);
 				break;
 				
-			case 2: 
-				GymFlipFitCustomerMenu customer = new GymFlipFitCustomerMenu();
-//				customer.gymOwnerActionPage(in, user);
+			case "customer": 
+				GymFlipFitCustomerMenu customerMenu = new GymFlipFitCustomerMenu();
+				Customer customer=customers.get(user.getUserID());
+				customerMenu.customerActionPage(in, customer);
 				break;
 				
-			case 3: 
+			case "gymOwner": 
+				
 				GymFlipFitGymOwnerMenu owner = new GymFlipFitGymOwnerMenu();
 //				owner.customerActionPage(in, user);
 				break;
