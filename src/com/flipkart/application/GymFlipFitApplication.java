@@ -1,8 +1,7 @@
 package com.flipkart.application;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
@@ -12,10 +11,37 @@ import com.flipkart.bean.User;
 public class GymFlipFitApplication {
 
 	public static void main(String[] args) {
+		
+		
+		// Data Structures
+		
+		HashMap<Integer, Customer> customers = new HashMap<>();
+		
+		HashMap<Integer, Booking> bookings = new HashMap<>();
+		
+		HashMap<Integer, Gym> gyms = new HashMap<>();
+		
+		HashMap<Integer, User> users = new HashMap<>();
+		
+		// Dummy Data
+		
+		User user1 = new User(1, "Aman", "Delhi", "aman@gmal.com", "customer", "password");
+		User user2 = new User(2, "Raj", "Delhi", "raj@gmal.com", "customer", "password");
+		users.put(1, user1);
+		users.put(2, user2); 
+		List<Integer> slots = new ArrayList<Integer>();
+		slots.add(1);
+		slots.add(2);
+		
+		Gym gym = new Gym(1, "Fitness Hub", slots, "registered", 1 );
+		gyms.put(1, gym);
+		
+		customers.put(1, new Customer(1, "Aman", "Address");
+		
 		System.out.println("\nWelcome to FlipFit Gym Application");
 		Scanner in = new Scanner(System.in);
 		int choice = 1;
-		openLoginMenu(in);
+		openLoginMenu(in, customers, bookings, gyms, users);
 		while (choice != 4) {
 
 			System.out.println("\nMenu:-");
@@ -29,7 +55,7 @@ public class GymFlipFitApplication {
 
 				switch (choice) {
 				case 1:
-					openLoginMenu(in);
+					openLoginMenu(in, customers, bookings, gyms, users);
 					break;
 				case 2:
 					GymFlipFitAdminMenu admin = new GymFlipFitAdminMenu();
@@ -95,10 +121,10 @@ public class GymFlipFitApplication {
 			case "customer": 
 				GymFlipFitCustomerMenu customerMenu = new GymFlipFitCustomerMenu();
 				Customer customer=customers.get(user.getUserID());
-				customerMenu.customerActionPage(in, customer);
+				customerMenu.customerActionPage(in, customers, bookings, gyms);
 				break;
 				
-			case "gymOwner": 
+			case "gymOwner":
 				
 				GymFlipFitGymOwnerMenu owner = new GymFlipFitGymOwnerMenu();
 //				owner.customerActionPage(in, user);
