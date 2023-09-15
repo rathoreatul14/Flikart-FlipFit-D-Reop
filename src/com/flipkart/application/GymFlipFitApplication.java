@@ -39,7 +39,7 @@ public class GymFlipFitApplication {
 		Gym gym = new Gym(1, "Fitness Hub", slots, "registered", 1 );
 		gyms.put(1, gym);
 		
-		customers.put(1, new Customer(1, "Aman", "Address");
+		customers.put(1, new Customer(1, "Aman", "Address"));
 		
 		System.out.println("\nWelcome to FlipFit Gym Application");
 		Scanner in = new Scanner(System.in);
@@ -124,7 +124,7 @@ public class GymFlipFitApplication {
 			case "customer": 
 				GymFlipFitCustomerMenu customerMenu = new GymFlipFitCustomerMenu();
 				Customer customer=customers.get(user.getUserID());
-				customerMenu.customerActionPage(in, customers, bookings, gyms);
+				customerMenu.customerActionPage(in, customer, bookings, gyms);
 				break;
 				
 			case "gymOwner":

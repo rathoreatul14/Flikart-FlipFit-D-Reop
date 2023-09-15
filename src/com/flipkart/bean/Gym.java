@@ -6,13 +6,13 @@ import java.util.List;
 public class Gym {
 
 	private int gymID;
-	private int gymName;
+	private String gymName;
 	private List<Integer> slotIDs = new ArrayList();
 	private String registerStatus;
 	private int gymOwnerID;
 	
 	
-	public Gym(int gymID, int gymName, List<Integer> slotIDs, String registerStatus, int gymOwnerID) {
+	public Gym(int gymID, String gymName, List<Integer> slotIDs, String registerStatus, int gymOwnerID) {
 		super();
 		this.gymID = gymID;
 		this.gymName = gymName;
@@ -23,11 +23,11 @@ public class Gym {
 	
 	
 	
-	public int getGymName() {
+	public String getGymName() {
 		return gymName;
 	}
 
-	public void setGymName(int gymName) {
+	public void setGymName(String gymName) {
 		this.gymName = gymName;
 	}
 
