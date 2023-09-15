@@ -23,9 +23,9 @@ public class DBUtils {
         else {
             try {
             	String url
-                = "jdbc:mysql://localhost:3306/test"; // table details
+                = "jdbc:mysql://localhost:3306/FlipFit"; // table details
             String username = "root"; // MySQL credentials
-            String password = "nimish755435";
+            String password = "Fk!_197977";
         		Class.forName(
         		    "com.mysql.cj.jdbc.Driver");
         	// Driver name

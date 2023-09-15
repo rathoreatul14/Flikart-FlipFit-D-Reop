@@ -35,7 +35,7 @@ public class GymFlipFitCustomerMenu {
         
     }
     
-    public void customerActionPage(Scanner in, Customer customer, HashMap<Integer, Booking> bookings, HashMap<Integer, Gym> gyms) {
+    public void customerActionPage(Scanner in, Customer customer) {
 		System.out.println("\nWelcome to FlipFit Customer Application");
 		CustomerServicesInterface customerService = new CustomerServices();
 
@@ -59,12 +59,12 @@ public class GymFlipFitCustomerMenu {
 				case 2:
 					customerService.updateProfile(customer);
 					break;
-				case 3:
-					customerService.viewBookings(customer, bookings);
-					break;
-				case 4:
-					customerService.viewGyms(gyms);
-					break;
+//				case 3:
+//					customerService.viewBookings(customer, bookings);
+//					break;
+//				case 4:
+//					customerService.viewGyms(gyms);
+//					break;
 				case 5:
 					System.out.println("Exit!!");
 					break;

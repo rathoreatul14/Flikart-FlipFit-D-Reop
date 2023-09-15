@@ -4,6 +4,7 @@
 package com.flipkart.business;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
 import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
@@ -14,13 +15,7 @@ import com.flipkart.bean.Gym;
  */
 public interface CustomerServicesInterface {
 	
-//	public void listCustomer();
-//	
-//	public void createCustomer();
-//	
-//	void deleteCustomer(int custID);
-
-//	void viewGyms(int cityID, HashMap<Integer, Gym> Gyms);
+	void registerCustomer(Scanner sc);
 
 	void viewProfile(Customer customer);
 
@@ -29,5 +24,6 @@ public interface CustomerServicesInterface {
 	void viewBookings(Customer customer, HashMap<Integer, Booking> hm);
 
 	void viewGyms(HashMap<Integer, Gym> Gyms);
+	
 
 }

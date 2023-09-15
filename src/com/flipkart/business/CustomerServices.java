@@ -3,22 +3,43 @@ package com.flipkart.business;
 import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
+import com.flipkart.dao.CustomerDao;
+import com.flipkart.bean.User;
 
 import java.util.*;
 
-
+import com.flipkart.bean.Booking;
 public class CustomerServices implements CustomerServicesInterface{
 	
+	CustomerDao dao = new CustomerDao();
+	
+	@Override
+	public void registerCustomer(Scanner sc) {
+		
+		System.out.println("Enter Name");
+		String  name = sc.next();
+		System.out.println("Enter Email");
+		String  email = sc.next();
+		System.out.println("Enter Address");
+		String  address = sc.next();
+		System.out.println("Enter Mobile");
+		String  mobile = sc.next();
+		System.out.println("Enter Password");
+		String  password = sc.next();
+		
+		User user=new User(1,name,email,"customer",password);
+		Customer customer =new Customer(1,name,address,user.getUserID(),mobile,email);
+		
+		dao.registerCustomer(user, customer);
+		System.out.println("Customer registerd successfully");
+	}
 
 	@Override
 	public void viewProfile(Customer customer) {
+		dao.viewProfile(customer);
+	}
 		// TODO Auto-generated method stub
 		
-		System.out.println("customer ID : " + customer.getCustomerID());
-		System.out.println("customer Name : " + customer.getName());
-		System.out.println("customer Address : " + customer.getAddress());
-		
-	}
 	
 
 	@Override
