@@ -7,6 +7,15 @@ public class Booking {
 	private int slotID;
 	private String status;
 	
+	
+	public Booking(int bookingID, int userID, int slotID, String status) {
+		super();
+		this.bookingID = bookingID;
+		this.userID = userID;
+		this.slotID = slotID;
+		this.status = status;
+	}
+
 	public int getBookingID() {
 		return bookingID;
 	}

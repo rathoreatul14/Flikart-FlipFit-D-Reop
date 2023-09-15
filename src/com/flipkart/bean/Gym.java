@@ -6,9 +6,40 @@ import java.util.List;
 public class Gym {
 
 	private int gymID;
+	private int gymName;
 	private List<Integer> slotIDs = new ArrayList();
 	private String registerStatus;
 	private int gymOwnerID;
+	
+	
+	public Gym(int gymID, int gymName, List<Integer> slotIDs, String registerStatus, int gymOwnerID) {
+		super();
+		this.gymID = gymID;
+		this.gymName = gymName;
+		this.slotIDs = slotIDs;
+		this.registerStatus = registerStatus;
+		this.gymOwnerID = gymOwnerID;
+	}
+	
+	
+	
+	public int getGymName() {
+		return gymName;
+	}
+
+	public void setGymName(int gymName) {
+		this.gymName = gymName;
+	}
+
+	public int getGymOwnerID() {
+		return gymOwnerID;
+	}
+
+	public void setGymOwnerID(int gymOwnerID) {
+		this.gymOwnerID = gymOwnerID;
+	}
+
+	
 
 	public int getGymID() {
 		return gymID;
