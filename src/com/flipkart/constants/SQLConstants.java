@@ -12,24 +12,24 @@ public class SQLConstants {
 	
 	
 	public static final String SQL_FETCH_ALL_OWNER_QUERY = "Select * From GymOwner";
-	public static final String SQL_FETCH_ALL_GYM_QUERY = "Select * From Gymnasium";
+	public static final String SQL_FETCH_ALL_GYM_QUERY = "Select * From Gym";
 	public static final String SQL_FETCH_PENDING_OWNER_REQ_QUERY = "Select * From GymOwner Where Approved = 0";
-	public static final String SQL_FETCH_PENDING_GYM_REQ_QUERY = "Select * From Gymnasium Where Approved = 0";
+	public static final String SQL_FETCH_PENDING_GYM_REQ_QUERY = "Select * From Gym Where Approved = 0";
 	public static final String SQL_APPR_SING_OWNER_REQ_QUERY = "Update GymOwner Set Approved = 1 Where GymOwnerId = (?)";
-	public static final String SQL_APPR_SING_GYM_REQ_QUERY = "Update Gymnasium Set Approved = 1 Where GymnasiumId = (?)";
-	public static final String SQL_UNAPPR_SING_GYM_REQ_QUERY = "Update Gymnasium Set Approved = 0 Where GymOwnerId = (?)";
+	public static final String SQL_APPR_SING_GYM_REQ_QUERY = "Update Gym Set Approved = 1 Where GymId = (?)";
+	public static final String SQL_UNAPPR_SING_GYM_REQ_QUERY = "Update Gym Set Approved = 0 Where GymOwnerId = (?)";
 	public static final String SQL_UNAPPR_SING_OWNER_REQ_QUERY = "Update GymOwner Set Approved = 0 Where GymOwnerId = (?)";
 	public static final String SQL_APPR_ALL_OWNER_QUERY = "Update GymOwner Set Approved = 1";
-	public static final String SQL_APPR_ALL_GYM_QUERY = "Update Gymnasium Set Approved = 1";
+	public static final String SQL_APPR_ALL_GYM_QUERY = "Update Gym Set Approved = 1";
 	
 	
 	public static final String SQL_FETCH_SING_OWNER_DET_QUERY = "Select * From GymOwner Where GymOwnerId = (?)";
-	public static final String SQL_FETCH_OWNER_GYM_DET_QUERY = "Select * From Gymnasium Where GymOwnerId = (?)";
+	public static final String SQL_FETCH_OWNER_GYM_DET_QUERY = "Select * From Gym Where GymOwnerId = (?)";
 	public static final String SQL_FETCH_OWNER_APPROVAL_QUERY = "Select Approved From GymOwner Where GymOwnerId = (?)";
-	public static final String SQL_SIZE_GYM_QUERY = "Select Count(*) From Gymnasium";
-	public static final String SQL_INSERT_GYM_QUERY = "Insert Into Gymnasium Values (?,?,?,?,?,?,?)";
-	public static final String SQL_SIZE_SLOTS_QUERY = "Select Count(*) From Slots";
-	public static final String SQL_INSERT_SLOTS_QUERY = "Insert Into Slots Values (?,?,?,?,?)";
+	public static final String SQL_SIZE_GYM_QUERY = "Select Count(*) From Gym";
+	public static final String SQL_INSERT_GYM_QUERY = "Insert Into Gym Values (?,?,?,?,?,?,?)";
+	public static final String SQL_SIZE_Slot_QUERY = "Select Count(*) From Slot";
+	public static final String SQL_INSERT_Slot_QUERY = "Insert Into Slot Values (?,?,?,?,?)";
 	public static final String SQL_SIZE_GYMOWNER_QUERY = "Select Count(*) From GymOwner";
 	public static final String SQL_SIZE_GYMOWNER_REG_QUERY = "Select Count(*) From GymOwnerRegistration";
 	public static final String SQL_REGISTER_GYMOWNER_QUERY = "Insert Into GymOwner Values (?,?,?,?,?,NULL,?,?,?,0)";
@@ -54,9 +54,9 @@ public class SQLConstants {
 	public static final String SQL_REGISTER_CUSTOMER_USER_QUERY = "Insert Into User (UserName,Password,Email,Role) Values (?,?,?,?)";
 	
 	
-	public static final String SQL_DATE_CHECK_FROM_SLOTID = "SELECT date, SlotTime from slots WHERE SlotId = (?)";
-	public static final String SQL_FETCH_SLOTID_FOR_CUSTOMER = "SELECT * from BookedSlot WHERE CustomerId = (?)"; 
-	public static final String SQL_DELETE_QUERY_FOR_CUST_IN_BOOKEDSLOT = "DELETE from BookedSlot Where CustomerId = (?) And SlotDate = (?) And SlotTime = (?)";
+	public static final String SQL_DATE_CHECK_FROM_SLOTID = "SELECT date, SlotTime from Slot WHERE SlotId = (?)";
+	public static final String SQL_FETCH_SLOTID_FOR_CUSTOMER = "SELECT * from Booking  WHERE CustomerId = (?)"; 
+	public static final String SQL_DELETE_QUERY_FOR_CUST_IN_Booking  = "DELETE from Booking  Where CustomerId = (?) And SlotDate = (?) And SlotTime = (?)";
 	
 	
 }
