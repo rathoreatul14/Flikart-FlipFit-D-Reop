@@ -1,19 +1,11 @@
 package com.flipkart.application;
 
 import java.time.LocalDate;
-<<<<<<< HEAD
 import java.util.*;
-=======
-<<<<<<< Updated upstream
 import java.util.HashMap;
 import java.util.Scanner;
->>>>>>> ba58d832e52b2655bb9c35bb165d676d3f706c00
 
 import com.flipkart.bean.Booking;
-=======
-import java.util.*;
-
->>>>>>> Stashed changes
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.User;
@@ -23,7 +15,6 @@ public class GymFlipFitApplication {
 
 	public static void main(String[] args) {
 		
-<<<<<<< HEAD
 		
 		// Data Structures
 		
@@ -49,19 +40,6 @@ public class GymFlipFitApplication {
 		gyms.put(1, gym);
 		
 		customers.put(1, new Customer(1, "Aman", "Address");
-=======
-		//
-		
-		
-		HashMap<Integer, Customer> customer = new HashMap<>();
-		HashMap<Integer, Gym> gym = new HashMap<>();
-		
-		
-		
-		//
-		
-		
->>>>>>> ba58d832e52b2655bb9c35bb165d676d3f706c00
 		
 		System.out.println("\nWelcome to FlipFit Gym Application");
 		Scanner in = new Scanner(System.in);
