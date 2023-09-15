@@ -43,8 +43,7 @@ public class UserDao {
 		   //System.out.println(output.getString("UserName"));
 		   if(output.next()) {
 		   
-		   System.out.println(output.getString(6));
-		   User user = new User(output.getInt(1),output.getString(2),output.getString(4),output.getString(3),output.getString(5));
+		   User user = new User(output.getInt(1),output.getString(2),output.getString(4),output.getString(5),output.getString(3));
 
 		   return user;
 		   }

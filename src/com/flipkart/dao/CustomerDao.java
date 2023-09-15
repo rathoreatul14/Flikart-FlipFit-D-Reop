@@ -110,7 +110,7 @@ public class CustomerDao {
 		    ResultSet output = stmt.executeQuery();
 		    System.out.println("\tName\tAddress\tEmail");
 		    while(output.next()) {
-		    	System.out.println("\t "+output.getString(3) + "\t " + output.getString(6) + "\t " + output.getString(5));
+		    	System.out.println("\t "+output.getString(2) + "\t " + output.getString(5) + "\t " + output.getString(4));
 		    }
 	    } catch(SQLException sqlExcep) {
 		       System.out.println(sqlExcep);
