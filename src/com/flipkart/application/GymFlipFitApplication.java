@@ -78,21 +78,16 @@ public class GymFlipFitApplication {
 		
 		
 		// authenticate
-		// hard coded right now
 		UserDao dao = new UserDao();
 		User user=dao.authenticateUser(username, password);
 		if(user==null) {
 			System.out.println("Invalid Credentials");
-			System.exit(0);
+			return;
 		}
-
-		System.out.println("User logged In");
-		
 		String role = user.getRole();
 //		LocalDate localDate = LocalDate.now();
 //		System.out.println(localDate.getDayOfMonth() + "/" + localDate.getMonth() + "/" + localDate.getYear());
-		System.out.println("Hello!! " + "\nWelcome to GMS");
-		System.out.println(role);
+		System.out.println("Hello!! ");
 		switch (role) {
 			case "admin": 
 				GymFlipFitAdminMenu admin = new GymFlipFitAdminMenu();

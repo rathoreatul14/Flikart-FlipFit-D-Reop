@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DBUtils;
 import com.flipkart.bean.*;
@@ -151,7 +153,7 @@ public class CustomerDao {
 	 *
 	 * @param gymId The ID of the gym.
 	 */
-	public void fetchSlotList(String gymId) {
+	public void fetchSlotList(int gymId) {
 		// Connect to the database and fetch the list of slots for the specified gym
 		// Print the fetched slot details
 		// Handle any exceptions that occur
@@ -162,14 +164,13 @@ public class CustomerDao {
 		try {
 			conn = DBUtils.getConnection();
 		    stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYM_SLOT_QUERY);
-		    stmt.setString(1, gymId); 
+		    stmt.setInt(1, gymId); 
 		    ResultSet output = stmt.executeQuery();
 //		    System.out.println(output);
-		    System.out.println("\tSlotID\tGymID\tDay\ttime");
+		    System.out.println("\tSlotId\tDay\ttime");
 		    while(output.next()) {
-		    	System.out.println("\t "+ output.getString(1) + " \t " 
-		    			+ output.getString(2) + "\t " 
-		    			+ output.getString(4) +"    " + output.getString(5)+":00hrs");
+		    	System.out.println("\t "+ output.getString(1)  + "\t " 
+		    			+ output.getString(3) +"    " + output.getString(4)+":00hrs");
 		    }
 	    } catch(SQLException sqlExcep) {
 //		       System.out.println(sqlExcep);
@@ -185,7 +186,7 @@ public class CustomerDao {
 	 * @param slotId     The ID of the slot to book.
 	 * @param customerId The ID of the customer.
 	 */
-	public void bookSlots(String slotId,String customerId) {
+	public void bookSlots(int slotId,int customerId) {
 		// Connect to the database and book the slot for the customer
 		// Retrieve necessary details from the slot
 		// Insert the booking details into the database
@@ -198,22 +199,24 @@ public class CustomerDao {
 	    	conn = DBUtils.getConnection();
 		    
 		    stmt = conn.prepareStatement(SQLConstants.SQL_DATE_CHECK_FROM_SLOTID);
-		    stmt.setString(1, slotId);
+		    stmt.setInt(1, slotId);
 		    ResultSet output = stmt.executeQuery();
 		    output.next();
 		    String date = output.getString(1);
-		    Integer times = output.getInt(2);
+		    Time times = output.getTime(2);
+		    
+		    System.out.println(date);
 		    
 		    stmt = conn.prepareStatement(SQLConstants.SQL_INSERT_BOOK_QUERY);
-		    stmt.setString(1, slotId);
-		    stmt.setString(2, customerId);
+		    stmt.setInt(1, slotId);
+		    stmt.setInt(2, customerId);
 		    stmt.setString(3, date);
-		    stmt.setInt(4, times);
+		    stmt.setTime(4, times);
 		    
 		    stmt.executeUpdate();
 		    
 	    } catch(SQLException sqlExcep) {
-//		       System.out.println(sqlExcep);
+	       System.out.println(sqlExcep);
 	    } catch(Exception excep) {
 	           excep.printStackTrace();
 	    }
@@ -264,7 +267,7 @@ public class CustomerDao {
 	 *
 	 * @param custId The ID of the customer.
 	 */
-	public void bookedGymList(String custId) {
+	public void bookedGymList(int custId) {
 		// Connect to the database and fetch the list of slots booked by the customer
 		// Print the fetched slot details
 		// Handle any exceptions that occur
@@ -275,27 +278,27 @@ public class CustomerDao {
 		try {
 			conn = DBUtils.getConnection(); 
 		    stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_SLOTID_FOR_CUSTOMER);
-		    stmt.setString(1, custId); 
+		    stmt.setInt(1, custId); 
 		    ResultSet output = stmt.executeQuery();
 		    
 		    while(output.next()) {
-		    	String slotId= output.getString(2);
+		    	int slotId= output.getInt(5);
 		    	stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_SLOT_DETAILS_QUERY);
-			    stmt.setString(1, custId); 
+			    stmt.setInt(1, custId); 
 			    ResultSet out = stmt.executeQuery();
 			    out.next();
 			    
 			    System.out.println("\tSlotID\tGymID\tDay\ttime");
 			    while(output.next()) {
-			    	System.out.println("\t "+ output.getString(1) + " \t " 
-			    			+ output.getString(2) + "\t " 
-			    			+ output.getString(4) +"    " + output.getString(5)+":00hrs");
+			    	System.out.println("\t "+ output.getInt(1) + " \t " 
+			    			+ output.getString(5) + "\t " 
+			    			+ output.getString(3) +"    " + output.getString(4)+":00hrs");
 			    }
 		    }
 		    
 		    
 	    } catch(SQLException sqlExcep) {
-//		       System.out.println(sqlExcep);
+	       System.out.println(sqlExcep);
 	    } catch(Exception excep) {
 	           excep.printStackTrace();
 	    }

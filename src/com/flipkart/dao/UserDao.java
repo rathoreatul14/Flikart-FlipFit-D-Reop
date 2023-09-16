@@ -36,8 +36,6 @@ public class UserDao {
 		   stmt = conn.prepareStatement(SQLConstants.SQL_AUTH_QUERY);
 		   stmt.setString(1, userName);
 		   stmt.setString(2, password);
-		   
-		   System.out.println(stmt);
 	
 		   ResultSet output = stmt.executeQuery();
 		   //System.out.println(output.getString("UserName"));
