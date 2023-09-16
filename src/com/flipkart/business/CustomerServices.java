@@ -1,8 +1,9 @@
 package com.flipkart.business;
 
-import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.dao.CustomerDao;
+import com.flipkart.exception.BookingExistsException;
+import com.flipkart.exception.SlotFilledException;
 import com.flipkart.bean.User;
 
 import java.util.*;
@@ -64,14 +65,25 @@ public class CustomerServices implements CustomerServicesInterface {
 
 	@Override
 	public void bookSlot(Customer customer) {
-		System.out.println("Enter the gymId to view slots.");
-		Scanner sc = new Scanner(System.in);
-		int gymId = sc.nextInt();
-		fetchSlots(gymId);
-		System.out.println("Enter the slotId to book slot.");
-		int slotId = sc.nextInt();
-		dao.bookSlots(slotId, customer.getCustomerID());
-		System.out.println("Slot booked Successfully");
+		try {
+			System.out.println("Enter the gymId to view slots.");
+			Scanner sc = new Scanner(System.in);
+			int gymId = sc.nextInt();
+			fetchSlots(gymId);
+			System.out.println("Enter the slotId to book slot.");
+			int slotId = sc.nextInt();
+			
+			if (dao.isFull(slotId)) {
+					throw new SlotFilledException();
+			} else if (dao.isAlreadyBooked(slotId, customer.getCustomerID())) {
+					throw new BookingExistsException();
+			} else {
+					dao.bookSlots(slotId, customer.getCustomerID());
+					System.out.println("Slot booked successfully!");		
+			}
+		}catch(Exception Ex) {
+			System.out.println(Ex.getMessage());
+		}	
 	}
 
 	public void fetchSlots(int gymId) {
