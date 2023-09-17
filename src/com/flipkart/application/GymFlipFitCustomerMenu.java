@@ -67,10 +67,11 @@ public class GymFlipFitCustomerMenu {
 					break;
 				case 5:
 					System.out.println("Exit!!");
-					break;
+					return;
 				// Default case statement
 				default:
 					System.out.println("Incorrect choice!!! Please try again!!!");
+					break;
 			}
 		}
 	}

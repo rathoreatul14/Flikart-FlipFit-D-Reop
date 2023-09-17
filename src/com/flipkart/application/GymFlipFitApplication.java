@@ -31,7 +31,7 @@ public class GymFlipFitApplication {
 		while (choice!=6) {
 
 			System.out.println("\nMenu:-");
-			System.out.println("\t1. Login\n" + "\t2. Admin Registration\n" + "\t3. Customer Registration\n" + "\t4. GymOwner Registration" + "\t5. Exit\n");
+			System.out.println("\t1. Login\n" + "\t2. Admin Login\n" + "\t3. Customer Registration\n" + "\t4. GymOwner Registration" + "\t5. Exit\n");
 
 			System.out.print("$ Enter your choice: ");
 
@@ -44,8 +44,9 @@ public class GymFlipFitApplication {
 					openLoginMenu(in);
 					break;
 				case 2:
-					GymFlipFitAdminMenu admin = new GymFlipFitAdminMenu();
-					admin.adminActionPage(in);
+					openLoginMenu(in);
+//					GymFlipFitAdminMenu admin = new GymFlipFitAdminMenu();
+//					admin.adminActionPage(in);
 					break;
 				case 3:
 					CustomerServicesInterface customerService=new CustomerServices();
@@ -62,7 +63,8 @@ public class GymFlipFitApplication {
 					break;
 
 				default:
-					System.out.println("Invalid Credentials");
+					System.out.println("\nIncorrect choice!!! Please try again!!!");
+					break;
 				}
 			} catch (Exception e) {
 				System.out.println("Error");

@@ -203,15 +203,26 @@ public class CustomerDao implements CustomerDaoInterface{
 			output.next();
 			String date = output.getString(1);
 			Time times = output.getTime(2);
-
-
+			
+			stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_PREVIOUS_BOOKING);
+			stmt.setInt(1, customerId);
+			stmt.setTime(2, times);
+			ResultSet out = stmt.executeQuery();
+			if(out.next()) {
+				
+				System.out.println("getting");
+				int previousSlotId = out.getInt(5);
+				
+				changeGymSlot( slotId, customerId, previousSlotId);
+			}
+			else {
 			stmt = conn.prepareStatement(SQLConstants.SQL_INSERT_BOOK_QUERY);
 			stmt.setInt(1, slotId);
 			stmt.setInt(2, customerId);
 			stmt.setString(3, date);
 			stmt.setTime(4, times);
 
-			stmt.executeUpdate();
+			stmt.executeUpdate();}
 
 		} catch (SQLException sqlExcep) {
 			System.out.println(sqlExcep);
@@ -302,13 +313,13 @@ public class CustomerDao implements CustomerDaoInterface{
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_SLOTID_FOR_CUSTOMER);
 			stmt.setInt(1, custId);
 			ResultSet output = stmt.executeQuery();
+			System.out.println("\tSlotID\tGymID\tDay\ttime");
 
 			while (output.next()) {
 				int slotId = output.getInt(5);
 				stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_SLOT_DETAILS_QUERY);
 				stmt.setInt(1, slotId);
 				ResultSet out = stmt.executeQuery();
-				System.out.println("\tSlotID\tGymID\tDay\ttime");
 				while (out.next()) {
 					System.out.println("\t " + out.getInt(1) + " \t " + out.getString(5) + "\t "
 							+ out.getString(3) + "    " + out.getString(4) + ":00hrs");
@@ -319,8 +330,54 @@ public class CustomerDao implements CustomerDaoInterface{
 			System.out.println(sqlExcep);
 		} catch (Exception excep) {
 			excep.printStackTrace();
+			
 		}
 		return;
+	}
+	
+	/**
+	 * Changes the booked slot for a customer in the database.
+	 *
+	 * @param slotId     The ID of the new slot to book.
+	 * @param customerId The ID of the customer.
+	 * @return true if the slot is changed successfully, false otherwise.
+	 */
+	public boolean changeGymSlot(int slotId,int customerId, int previousSlot) {
+		// Connect to the database and retrieve the details of the new slot
+		// Retrieve the day and times of the new slot
+		// Retrieve the current bookings of the customer on the same day and times
+		// Delete the existing bookings and insert the new booking
+		// Return whether the slot was changed successfully
+		// Handle any exceptions that occur
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			
+			conn = DBUtils.getConnection();
+		    stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_BOOK_QUERY_FOR_A_CUST);
+		    stmt.setInt(1, customerId);
+		    stmt.setInt(2, previousSlot);
+			ResultSet out = stmt.executeQuery();
+			while(out.next()) {
+				int bookingId = out.getInt(1);
+				System.out.println(bookingId);
+				
+				stmt = conn.prepareStatement(SQLConstants.SQL_UPDATE_BOOKING);
+				stmt.setInt(1, slotId);
+				stmt.setInt(2, bookingId);
+				stmt.executeUpdate();
+				
+			}
+			return true;
+		    	
+	    } catch(SQLException sqlExcep) {
+//		       System.out.println(sqlExcep);
+	    } catch(Exception excep) {
+	           excep.printStackTrace();
+	    }
+		return true;
 	}
 
 }

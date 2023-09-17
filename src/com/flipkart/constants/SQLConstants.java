@@ -26,7 +26,7 @@ public class SQLConstants {
 
 	
 	public static final String SQL_FETCH_ALL_OWNER_QUERY = "Select * From GymOwner";
-	public static final String SQL_FETCH_ALL_GYM_QUERY = "Select * From Gym";
+	public static final String SQL_FETCH_ALL_GYM_QUERY = "Select * From Gym Where Approved = 1";
 	public static final String SQL_FETCH_PENDING_OWNER_REQ_QUERY = "Select * From GymOwner Where Approved = 0";
 	public static final String SQL_FETCH_PENDING_GYM_REQ_QUERY = "Select * From Gym Where Approved = 0";
 	public static final String SQL_APPR_SING_OWNER_REQ_QUERY = "Update GymOwner Set Approved = 1 Where GymOwnerId = (?)";
@@ -81,6 +81,8 @@ public class SQLConstants {
 	
 	public static final String SQL_FETCHING_GYM_OWNER = "Select * from GymOwner Where ownerId = (?)";
 	public static final String SQL_FETCHING_GYM = "Select * from Gym Where GymId = (?)";
+	public static final String SQL_CHECK_PREVIOUS_BOOKING = "Select * from Booking Where CustomerId = (?) AND SlotTime = (?)";
+	public static final String SQL_UPDATE_BOOKING = "UPDATE Booking SET SlotId = (?) WHERE BookingId = (?)";
 
 
 

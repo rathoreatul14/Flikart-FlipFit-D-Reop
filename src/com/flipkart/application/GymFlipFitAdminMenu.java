@@ -21,9 +21,7 @@ public class GymFlipFitAdminMenu {
 							+ "\t4.View Gym Pending Requests\n" 
 							+ "\t5.Approve Gym Owner Request\n" 
 							+ "\t6.Approve Gym Request\n"
-							+ "\t7.View Profile\n"
-							+ "\t8.Update Password\n"
-							+ "\t9.RETURN\n");
+							+ "\t7.RETURN\n");
 
 			System.out.print("$ Enter your choice: ");
 			choice = in.nextInt();
@@ -49,12 +47,6 @@ public class GymFlipFitAdminMenu {
 					adminService.approveGym();;
 					break;
 				case 7:
-					adminService.viewProfile();;
-					break;
-				case 8:
-					adminService.updatePassword();;
-					break;
-				case 9:
 					System.out.println("Exit!!");
 					break;
 				// Default case statement
