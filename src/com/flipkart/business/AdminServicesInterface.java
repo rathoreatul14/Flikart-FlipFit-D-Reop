@@ -10,18 +10,20 @@ public interface AdminServicesInterface {
 	
 	public void viewProfile();
 	
-	public void updateProfile();
+	void updatePassword();
+
+	void approveGymOwner();
+
+	void approveGym();
+
+	public void viewAllGyms();
 	
-	public boolean approveGymOwner(String id);
+	public void viewAllGymOwners();
 	
-	public boolean approveGym(String id);
 	
 	public void viewPendingGymOwner();
 	
 	public void viewPendingGym();
 	
-	public void viewAllGyms();
-	
-	public void viewAllGymOwners();
 
 }
