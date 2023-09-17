@@ -6,7 +6,7 @@ package com.flipkart.bean;
 public class GymOwner {
 	private int id;
 	private String name;
-	private boolean status =false;
+	private String status;
 	private String aadharNumber;
 	private String contactNumber;
 	private String address;
@@ -44,7 +44,7 @@ public class GymOwner {
 		this.address = address;
 	}
 
-	public GymOwner(int id, String name, boolean status, String aadharNumber, String contactNumber, String address,int userId) {
+	public GymOwner(int id, String name, String status, String aadharNumber, String contactNumber, String address,int userId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -75,11 +75,11 @@ public class GymOwner {
 		this.name = name;
 	}
 
-	public Boolean getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

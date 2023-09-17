@@ -41,7 +41,7 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 
 			ResultSet output = stmt.executeQuery();
 			if (output.next()) {
-				GymOwner gymOwner = new GymOwner(output.getInt(1), output.getString(2),output.getBoolean(3), output.getString(4), output.getString(5),output.getString(6),userId);
+				GymOwner gymOwner = new GymOwner(output.getInt(1), output.getString(2),output.getString(3), output.getString(4), output.getString(5),output.getString(6),userId);
 				return gymOwner;
 			}
 
@@ -75,7 +75,7 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 
 			stmt = conn.prepareStatement(SQLConstants.SQL_REGISTER_GYMOWNER_QUERY);
 			stmt.setString(1, owner.getName());
-			stmt.setBoolean(2, owner.getStatus());
+			stmt.setString(2, owner.getStatus());
 			stmt.setString(3, owner.getAadharNumber());
 			stmt.setString(4, owner.getContactNumber());
 			stmt.setString(5, owner.getAddress());
