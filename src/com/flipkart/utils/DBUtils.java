@@ -3,9 +3,13 @@
  */
 package com.flipkart.utils;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class DBUtils {
 	
@@ -22,26 +26,25 @@ public class DBUtils {
             return connection;
         else {
             try {
-            	String url
-                = "jdbc:mysql://localhost:3306/FlipFit"; // table details
-            String username = "root"; // MySQL credentials
-<<<<<<< Updated upstream
-            String password = "root@123";
-=======
-            String password = "Arj925@750";
->>>>>>> Stashed changes
-        		Class.forName(
-        		    "com.mysql.cj.jdbc.Driver");
-        	// Driver name
-            connection = DriverManager.getConnection(
-                url, username, password);
+            	Properties prop = new Properties();
+                InputStream inputStream = DBUtils.class.getClassLoader().getResourceAsStream("./config.properties");
+                prop.load(inputStream);
+                String driver = prop.getProperty("driver");
+                String url = prop.getProperty("url");
+                String user = prop.getProperty("user");
+                String password = prop.getProperty("password");
+                Class.forName(driver);
+                connection = DriverManager.getConnection(url, user, password);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (SQLException e) {
                 e.printStackTrace();
-            } 
-            
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return connection;
-           }
-     }
+        }
+    }
 }
