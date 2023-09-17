@@ -3,17 +3,22 @@
  */
 package com.flipkart.business;
 
+import java.util.Scanner;
+
+import com.flipkart.bean.GymOwner;
+
 /**
  * 
  */
 public interface GymOwnerServicesInterface {
 	
-	public void viewProfile();
+	public void viewProfile(GymOwner owner);
 	
-	public void updateProfile();
+	public void updateProfile(GymOwner owner);
 	
-	public void registerGym();
+	public void registerGymOwner(Scanner in);
 	
-	public void viewGym();
-	
+	public void viewGyms(GymOwner owner);
+
+	public void registerGym(Scanner in, GymOwner owner);
 }

@@ -8,10 +8,15 @@ import java.util.Scanner;
 import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
+import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
 import com.flipkart.dao.CustomerDao;
+import com.flipkart.dao.GymOwnerDao;
+import com.flipkart.dao.GymOwnerDaoInterface;
 import com.flipkart.dao.UserDao;
 import com.flipkart.business.CustomerServicesInterface;
+import com.flipkart.business.GymOwnerServices;
+import com.flipkart.business.GymOwnerServicesInterface;
 import com.flipkart.business.CustomerServices;
 
 
@@ -23,7 +28,7 @@ public class GymFlipFitApplication {
 		System.out.println("\nWelcome to FlipFit Gym Application");
 		Scanner in = new Scanner(System.in);
 		int choice = 1;
-		while (choice != 4) {
+		while (choice!=6) {
 
 			System.out.println("\nMenu:-");
 			System.out.println("\t1. Login\n" + "\t2. Admin Registration\n" + "\t3. Customer Registration\n" + "\t4. GymOwner Registration" + "\t5. Exit\n");
@@ -47,10 +52,12 @@ public class GymFlipFitApplication {
 					customerService.registerCustomer(in);
 					break;
 				case 4:
-					GymFlipFitGymOwnerMenu gymOwner = new GymFlipFitGymOwnerMenu();
-					gymOwner.run(in);
+					GymOwnerServicesInterface gymServices = new GymOwnerServices();
+					gymServices.registerGymOwner(in);
+					
 					break;
 				case 5:
+					System.out.println("Logged Out Successfully...");
 //					System.exit(0);
 					break;
 
@@ -104,7 +111,9 @@ public class GymFlipFitApplication {
 			case "gymOwner":
 				
 				GymFlipFitGymOwnerMenu owner = new GymFlipFitGymOwnerMenu();
-//				owner.customerActionPage(in, user);
+				GymOwnerDaoInterface gymOwnerDao = new GymOwnerDao();
+				GymOwner gymOwner =gymOwnerDao.getGymOwnerFromUserId(user.getUserID());
+				owner.GymOwnerActionPage(in, gymOwner);
 				break;
 				
 			default:

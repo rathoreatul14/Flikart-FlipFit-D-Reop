@@ -10,6 +10,7 @@ public class GymOwner {
 	private String aadharNumber;
 	private String contactNumber;
 	private String address;
+	private int userId;
 
 	public String getAadharNumber() {
 		return aadharNumber;
@@ -23,6 +24,14 @@ public class GymOwner {
 		return contactNumber;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
@@ -33,6 +42,21 @@ public class GymOwner {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public GymOwner(int id, String name, String status, String aadharNumber, String contactNumber, String address,int userId) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.status = status;
+		this.aadharNumber = aadharNumber;
+		this.contactNumber = contactNumber;
+		this.address = address;
+		this.userId = userId;
+	}
+
+	public GymOwner() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getId() {

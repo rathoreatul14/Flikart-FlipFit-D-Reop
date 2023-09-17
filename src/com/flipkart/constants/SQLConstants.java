@@ -36,9 +36,9 @@ public class SQLConstants {
 	public static final String SQL_APPR_ALL_OWNER_QUERY = "Update GymOwner Set Approved = 1";
 	public static final String SQL_APPR_ALL_GYM_QUERY = "Update Gym Set Approved = 1";
 	
-	
 	public static final String SQL_FETCH_SING_OWNER_DET_QUERY = "Select * From GymOwner Where GymOwnerId = (?)";
-	public static final String SQL_FETCH_OWNER_GYM_DET_QUERY = "Select * From Gym Where GymOwnerId = (?)";
+	public static final String SQL_FETCH_OWNER_GYM_DET_QUERY = "Select * From Gyms Where GymOwnerId = (?)";
+	public static final String SQL_FETCH_GYMOWNER_USING_USERID_QUERY = "Select * From GymOwner Where UserId = (?)";
 	public static final String SQL_FETCH_OWNER_APPROVAL_QUERY = "Select Approved From GymOwner Where GymOwnerId = (?)";
 	public static final String SQL_SIZE_GYM_QUERY = "Select Count(*) From Gym";
 	public static final String SQL_INSERT_GYM_QUERY = "Insert Into Gym Values (?,?,?,?,?,?,?)";
@@ -46,9 +46,11 @@ public class SQLConstants {
 	public static final String SQL_INSERT_Slot_QUERY = "Insert Into Slot Values (?,?,?,?,?)";
 	public static final String SQL_SIZE_GYMOWNER_QUERY = "Select Count(*) From GymOwner";
 	public static final String SQL_SIZE_GYMOWNER_REG_QUERY = "Select Count(*) From GymOwnerRegistration";
-	public static final String SQL_REGISTER_GYMOWNER_QUERY = "Insert Into GymOwner Values (?,?,?,?,?,NULL,?,?,?,0)";
+	public static final String SQL_REGISTER_GYMOWNER_QUERY = "Insert Into GymOwner (name,status,aadhar,contactNumber,address,userId) Values (?,?,?,?,?,?)";
 	public static final String SQL_REGISTER_GYMOWNER_REG_QUERY = "Insert Into GymOwnerRegistration Values (?,NULL,NULL,?)";
-	public static final String SQL_REGISTER_GYMOWNER_USER_QUERY = "Insert Into User Values (?,?,?)";
+	public static final String SQL_REGISTER_GYMOWNER_USER_QUERY = "Insert Into User (UserName,Password,Email,Role) Values (?,?,?,?)";
+	public static final String SQL_FETCH_GYMOWNER_QUERY = "Select * From GymOwner Where userId = (?)";
+	public static final String SQL_UPDATE_GYMOWNER_QUERY = "Update GymOwner Set name= (?), aadhar=(?),contactNumber= (?), address= (?) Where userId = (?)";
 	
 	
 	public static final String SQL_FETCH_GYM_SLOT_QUERY = "Select * From Slot Where GymId = (?)";

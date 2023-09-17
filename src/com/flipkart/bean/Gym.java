@@ -23,6 +23,15 @@ public class Gym {
 	
 	
 	
+	public Gym(int gymID, String gymName, String registerStatus) {
+		super();
+		this.gymID = gymID;
+		this.gymName = gymName;
+		this.registerStatus = registerStatus;
+	}
+
+
+
 	public String getGymName() {
 		return gymName;
 	}
