@@ -5,6 +5,10 @@ import java.util.Scanner;
 import com.flipkart.bean.User;
 import com.flipkart.dao.AdminDao;
 import com.flipkart.dao.UserDao;
+import com.flipkart.exception.AlreadyApprovedGymException;
+import com.flipkart.exception.AlreadyApprovedGymOwnerException;
+import com.flipkart.exception.WrongGymIdException;
+import com.flipkart.exception.WrongGymOwnerIdException;
 
 public class AdminServices implements AdminServicesInterface{
 
@@ -41,14 +45,14 @@ public class AdminServices implements AdminServicesInterface{
 
 	@Override
 	public void viewAllGyms() {
-		// TODO Auto-generated method stub
+		
 		dao.viewAllGyms();
 		
 	}
 	
 	@Override
 	public void viewAllGymOwners() {
-		// TODO Auto-generated method stub
+		
 		dao.viewAllGymOwners();
 		
 	}
@@ -56,29 +60,70 @@ public class AdminServices implements AdminServicesInterface{
 	@Override
 	public void approveGymOwner() {
 		// TODO Auto-generated method stub
-		System.out.println("Enter gym owner id: ");
-		int id = sc.nextInt();
-		dao.approveGymOwner(id);
+	
+		
+		// wrong GymOwner ID exception  && already approved GymOwner exception
+		
+		try {
+			
+			System.out.println("Enter gym owner id: ");
+			
+			int id = sc.nextInt();
+			
+			if(dao.wrongGymOwnerId(id)) {
+				throw new WrongGymOwnerIdException(id);
+			}else if(dao.alreadyApprovedGymOwner(id)){
+				throw new AlreadyApprovedGymOwnerException(id);
+			}else {
+				
+				dao.approveGymOwner(id);
+			}
+			
+		} catch (Exception e)
+		{
+			System.out.println(e);
+		}
+		
+		   
 	}
 
 	@Override
 	public void approveGym() {
 		// TODO Auto-generated method stub
-		System.out.println("Enter gym id: ");
-		int id = sc.nextInt();
-		dao.approveGym(id);
+		
+		
+		// wrong Gym ID exception && already approved exception
+		
+		try {
+			
+			System.out.println("Enter gym id: ");
+			int id = sc.nextInt();
+			
+			if(dao.wrongGymId(id)) {
+				throw new WrongGymIdException(id);
+			}else if(dao.alreadyApprovedGym(id)){
+				throw new AlreadyApprovedGymException(id);
+			}else {
+				dao.approveGym(id);
+			}
+			
+		} catch (Exception e)
+		
+		{
+			System.out.println(e);
+		}
 		
 	}
 
 	@Override
 	public void viewPendingGymOwner() {
-		// TODO Auto-generated method stub
+
 		dao.viewPendingGymOwner();
 	}
 
 	@Override
 	public void viewPendingGym() {
-		// TODO Auto-generated method stub
+	
 		dao.viewPendingGym();
 	}
 	

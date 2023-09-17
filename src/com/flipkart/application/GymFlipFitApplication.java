@@ -45,7 +45,7 @@ public class GymFlipFitApplication {
 					break;
 				case 2:
 					GymFlipFitAdminMenu admin = new GymFlipFitAdminMenu();
-					admin.run(in);
+					admin.adminActionPage(in);
 					break;
 				case 3:
 					CustomerServicesInterface customerService=new CustomerServices();

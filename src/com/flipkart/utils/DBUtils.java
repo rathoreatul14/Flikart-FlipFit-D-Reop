@@ -25,7 +25,11 @@ public class DBUtils {
             	String url
                 = "jdbc:mysql://localhost:3306/FlipFit"; // table details
             String username = "root"; // MySQL credentials
+<<<<<<< Updated upstream
             String password = "root@123";
+=======
+            String password = "Arj925@750";
+>>>>>>> Stashed changes
         		Class.forName(
         		    "com.mysql.cj.jdbc.Driver");
         	// Driver name

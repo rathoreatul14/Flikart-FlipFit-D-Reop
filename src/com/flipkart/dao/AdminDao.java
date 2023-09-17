@@ -32,7 +32,9 @@ public class AdminDao implements AdminDaoInterface{
 			       System.out.println("No admin registered yet");
 			   }
 
-		   } catch(Exception e) {}
+		   } catch(Exception e) {
+			   System.out.println(e);
+		   }
 	}
 	
 	@Override
@@ -47,9 +49,11 @@ public class AdminDao implements AdminDaoInterface{
 		   stmt.setString(1, Password);
 		   stmt.setString(2, userName);
 		   
-		   ResultSet output = stmt.executeQuery();
+		   stmt.executeUpdate();
 
-	   } catch(Exception e) {}
+	   } catch(Exception e) {
+		   System.out.println(e);
+	   }
 	}
 	
 	@Override
@@ -66,12 +70,14 @@ public class AdminDao implements AdminDaoInterface{
 			   if (output.next()) {
 				   System.out.println("\n\tID\tGym Name\tStatus");
 			       do {
-			           System.out.println("\t" + output.getString(1) + " \t " + output.getString(2)+ " \t " + output.getString(3));
+			           System.out.println("\t" + output.getInt(1) + " \t " + output.getString(2)+ " \t " + output.getInt(5));
 			       } while (output.next());
 			   } else {
 			       System.out.println("No gyms available");
 			   }
-		   } catch(Exception e) {} 
+		   } catch(Exception e) {
+			   System.out.println(e);
+		   } 
 	   }
 	
 	@Override
@@ -94,13 +100,15 @@ public class AdminDao implements AdminDaoInterface{
 			   } else {
 			       System.out.println("No gym owner registered yet");
 			   }
-		   } catch(Exception e) {} 
+		   } catch(Exception e) {
+			   System.out.println(e);
+		   } 
 	   }
 	   
 	@Override
 	  public void approveGymOwner(int id) {
 			// TODO Auto-generated method stub
-		  Connection conn = null;
+		   Connection conn = null;
 		   PreparedStatement stmt = null;
 		   
 		   try {
@@ -109,27 +117,34 @@ public class AdminDao implements AdminDaoInterface{
 			   stmt = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_OWNER_QUERY);
 			   stmt.setString(1, "Approved");
 			   stmt.setInt(2, id);
-			   ResultSet output = stmt.executeQuery();
+			   stmt.executeUpdate();
+			   System.out.println("GymOwner Approved Successfully!!");
+			   
 
-		   } catch(Exception e) {}
+		   } catch(Exception e) {
+			   
+			   System.out.println(e);
+		   };
 		}
 
 
 	@Override
 		public void approveGym(int id) {
 			// TODO Auto-generated method stub
-			Connection conn = null;
+			   Connection conn = null;
 			   PreparedStatement stmt = null;
 			   
 			   try {
 				   conn = DBUtils.getConnection();
-				   
 				   stmt = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_QUERY);
-				   stmt.setString(1, "Approved");
+				   stmt.setInt(1, 1);
 				   stmt.setInt(2, id);	   
-				   ResultSet output = stmt.executeQuery();
+				   stmt.executeUpdate();
+				   System.out.println("Gym approved successfully!!");
 
-			   } catch(Exception e) {}
+			   } catch(Exception e) {
+				   System.out.println(e);
+			   }
 		}
 	   
 	@Override
@@ -148,38 +163,170 @@ public class AdminDao implements AdminDaoInterface{
 				   if (output.next()) {
 					   System.out.println("\n\tID\tGym Owner Name");
 				       do {
-				           System.out.println("\t" + output.getString(1) + " \t " + output.getString(2));
+				           System.out.println("\t" + output.getInt(1) + " \t " + output.getString(2));
 				       } while (output.next());
 				   } else {
 				       System.out.println("No pending gym owners available.");
 				   }
-			   } catch(Exception e) {} 
+			   } catch(Exception e) {
+				   System.out.println(e);
+			   } 
 		}
 
 
 	@Override
 		public void viewPendingGym() {
 			// TODO Auto-generated method stub
-			Connection conn = null;
+			   Connection conn = null;
 			   PreparedStatement stmt = null;
 			   
 			   try {
 				   conn = DBUtils.getConnection();
 				   
 				   stmt = conn.prepareStatement(SQLConstants.SQL_PENDING_GYM_QUERY);
-				   stmt.setString(1, "Unapproved");
+				   stmt.setInt(1, 0);
 				   ResultSet output = stmt.executeQuery();
 
 				   if (output.next()) {
 					   System.out.println("\n\tID\tGym Name");
 				       do {
-				           System.out.println("\t" + output.getString(1) + " \t " + output.getString(2));
+				           System.out.println("\t" + output.getInt(1) + " \t " + output.getString(2));
 				       } while (output.next());
 				   } else {
 				       System.out.println("No pending gyms available.");
 				   }
-			   } catch(Exception e) {} 
+			   } catch(Exception e) {
+				   System.out.println(e);
+			   } 
 		}
+	
+	@Override
+	
+	public boolean wrongGymOwnerId(int id) {
+		// TODO Auto-generated method stub
+		
+		
+		   Connection conn = null;
+		   
+		   PreparedStatement stmt = null;
+		   
+		   try {
+			   conn = DBUtils.getConnection();
+			   
+			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCHING_GYM_OWNER);
+			   stmt.setInt(1, id);
+			   ResultSet output = stmt.executeQuery();
+			   int countRows = 0;
+			   
+			   if(output.next()) {
+				   countRows++;
+			   }
+			   
+			   if(countRows == 0)
+				   return true;
+			   return false;
+			   
+		   } catch(Exception e) {
+			   System.out.println(e);
+		   } 
+		
+		
+		return false;
+	}
+	
+	@Override 
+
+	public boolean alreadyApprovedGymOwner(int id) {
+		// TODO Auto-generated method stub
+		
+		   Connection conn = null;
+		   PreparedStatement stmt = null;
+		   
+		   try {
+			   conn = DBUtils.getConnection();
+			   
+			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCHING_GYM_OWNER);
+			   stmt.setInt(1, id);
+			   ResultSet output = stmt.executeQuery();
+			   output.next();
+			   String alreadyApproved = output.getString(3);
+			   String s = "Approved";
+			   
+			   if(alreadyApproved.equals(s)) {
+				   return true;
+			   }else {
+				   return false;
+			   }
+			   
+			   
+		   } catch(Exception e) {
+			   System.out.println(e);
+		   } 
+		
+		return false;
+	}
+	
+	
+	@Override 
+
+	public boolean wrongGymId(int id) {
+		// TODO Auto-generated method stub
+		
+		   Connection conn = null;
+		   PreparedStatement stmt = null;
+		   
+		   try {
+			   conn = DBUtils.getConnection();
+			   
+			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCHING_GYM);
+			   stmt.setInt(1, id);
+			   ResultSet output = stmt.executeQuery();
+			   int countRows = 0;
+			   
+			   if(output.next()) {
+				   countRows++;
+			   }
+			   if(countRows == 0)
+				   return true;
+			   return false;
+			   
+		   } catch(Exception e) {
+			   System.out.println(e);
+		   } 
+		
+		
+		return false;
+	}
+	
+	@Override
+
+	public boolean alreadyApprovedGym(int id) {
+		// TODO Auto-generated method stub
+		
+		   Connection conn = null;
+		   PreparedStatement stmt = null;
+		   
+		   try {
+			   conn = DBUtils.getConnection();
+			   
+			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCHING_GYM);
+			   stmt.setInt(1, id);
+			   ResultSet output = stmt.executeQuery();
+			   output.next();
+			   int alreadyApproved = output.getInt(5);
+              
+			   if(alreadyApproved > 0) {
+				   return true;
+			   }else {
+				   return false;
+			   }
+			   
+		   } catch(Exception e) {
+			   System.out.println(e);
+		   } 
+		
+		return false;
+	}
 		
 	   
 }

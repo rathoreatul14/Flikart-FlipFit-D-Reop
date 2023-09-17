@@ -23,5 +23,13 @@ public interface AdminDaoInterface {
 	void viewPendingGymOwner();
 
 	void viewPendingGym();
+
+	boolean wrongGymOwnerId(int id);
+
+	boolean alreadyApprovedGymOwner(int id);
+
+	boolean wrongGymId(int id);
+
+	boolean alreadyApprovedGym(int id);
 	
 }

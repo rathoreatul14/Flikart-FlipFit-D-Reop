@@ -15,13 +15,13 @@ public class SQLConstants {
 	
 	public static final String SQL_UPDATE_ADMIN_PASSWORD_QUERY = "UPDATE User SET Password = (?)WHERE UserName = (?)";
 	
-	public static final String SQL_APPROVE_GYM_OWNER_QUERY = "UPDATE GymOwner SET Status = (?) WHERE Id = (?)";
+	public static final String SQL_APPROVE_GYM_OWNER_QUERY = "UPDATE GymOwner SET status = (?) WHERE ownerId = (?)";
 	
-	public static final String SQL_APPROVE_GYM_QUERY = "UPDATE Gym SET Status = (?) WHERE Id = (?)";
+	public static final String SQL_APPROVE_GYM_QUERY = "UPDATE Gym SET Approved = (?) WHERE GymId = (?)";
 	
 	public static final String SQL_PENDING_GYM_OWNER_QUERY = "Select * From GymOwner Where Status = (?)";
 
-	public static final String SQL_PENDING_GYM_QUERY = "Select * From Gym Where Status = (?)";
+	public static final String SQL_PENDING_GYM_QUERY = "Select * From Gym Where Approved = (?)";
 
 
 	
@@ -73,6 +73,14 @@ public class SQLConstants {
 	public static final String SQL_DATE_CHECK_FROM_SLOTID = "SELECT SlotDate, SlotTime from Slot WHERE SlotId = (?)";
 	public static final String SQL_FETCH_SLOTID_FOR_CUSTOMER = "SELECT * from Booking  WHERE CustomerId = (?)"; 
 	public static final String SQL_DELETE_QUERY_FOR_CUST_IN_Booking  = "DELETE from Booking  Where CustomerId = (?) And SlotDate = (?) And SlotTime = (?)";
+
+
+	
+	
+	// queries for exceptions
+	
+	public static final String SQL_FETCHING_GYM_OWNER = "Select * from GymOwner Where ownerId = (?)";
+	public static final String SQL_FETCHING_GYM = "Select * from Gym Where GymId = (?)";
 
 
 
