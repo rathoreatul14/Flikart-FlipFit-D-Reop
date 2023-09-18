@@ -12,6 +12,7 @@ public class CustomerServices implements CustomerServicesInterface {
 
 	CustomerDao dao = new CustomerDao();
 
+	// Registers a new customer
 	@Override
 	public void registerCustomer(Scanner sc) {
 
@@ -33,11 +34,13 @@ public class CustomerServices implements CustomerServicesInterface {
 		System.out.println("Customer registerd successfully");
 	}
 
+	// View details of particular customer
 	@Override
 	public void viewProfile(Customer customer) {
 		dao.viewProfile(customer);
 	}
 
+	// Update details of a particular customer
 	@Override
 	public void updateProfile(Customer customer) {
 		// TODO Auto-generated method stub
@@ -53,16 +56,19 @@ public class CustomerServices implements CustomerServicesInterface {
 
 	}
 
+	// View bookings of an user
 	@Override
 	public void viewBookings(Customer customer) {
 		dao.bookedGymList(customer.getCustomerID());
 	}
 
+	// Prints list of all gyms
 	@Override
 	public void viewGyms() {
 		dao.fetchGymList();
 	}
 
+	// To book a slot
 	@Override
 	public void bookSlot(Customer customer) {
 		try {
@@ -86,6 +92,7 @@ public class CustomerServices implements CustomerServicesInterface {
 		}	
 	}
 
+	// Fetch list of slots in a gym
 	public void fetchSlots(int gymId) {
 		dao.fetchSlotList(gymId);
 	}
