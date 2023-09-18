@@ -12,10 +12,17 @@ import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
 import com.flipkart.dao.GymOwnerDao;
 import com.flipkart.dao.GymOwnerDaoInterface;
+
 import com.flipkart.utils.OutputFormatter;
+
+import com.flipkart.validator.GymOwnerValidator;
+import com.flipkart.validator.UserValidator;
+
 
 public class GymOwnerServices implements GymOwnerServicesInterface{
 	GymOwnerDaoInterface gymOwnerDao = new GymOwnerDao();
+	UserValidator userValidator = new UserValidator();
+	GymOwnerValidator gymOwnerValidation = new GymOwnerValidator();
 	@Override
 	public void registerGymOwner(Scanner in) {
 		// TODO Auto-generated method stub
@@ -24,14 +31,48 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 			String name = in.next();
 			System.out.print("$ Enter your email: ");
 			String email = in.next();
+			
+			while(!UserValidator.isValidEmail(email)) {
+				
+				System.out.println("Invalid Email : ");
+				System.out.print("$ Enter your email again: ");
+			    email = in.next();
+				
+			}
+			
 			System.out.print("$ Enter your mobile: ");
 			String mobile = in.next();
 			System.out.print("$ Enter your address: ");
 			String address = in.next();
 			System.out.print("$ Enter your aadhaarNumber: ");
 			String aadhaarNumber = in.next();
+			
+			
+			while(!GymOwnerValidator.isValidAadharNumber(aadhaarNumber)) {
+				
+				System.out.println(("Invalid Aadhar Number : Please Register Again"));
+				System.out.print("$ Enter your aadhaarNumber again: ");
+			    aadhaarNumber = in.next();
+				
+			}
+			
 			System.out.print("$ Enter your gstNumber: ");
 			String gstNumber = in.next();
+
+			
+			
+			while(!GymOwnerValidator.isValidGST(gstNumber)) {
+				
+				System.out.println("Invalid GST Number : Please Register Again");
+				System.out.print("$ Enter your gstNumber: ");
+			    gstNumber = in.next();
+	
+			}
+			
+			
+			System.out.print("$ Enter your role: ");
+			String role = in.next();
+
 			System.out.print("Enter your Password: ");
 			String password = in.next();
 			User user = new User(1,name,email,"gymOwner",password);

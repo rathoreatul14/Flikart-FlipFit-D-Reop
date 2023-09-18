@@ -7,6 +7,7 @@ package com.flipkart.dao;
  * 
  */
 public interface AdminDaoInterface {
+
 	/**
 	 * Method to get Admin Details
 	 * @param userName
@@ -19,6 +20,7 @@ public interface AdminDaoInterface {
 	 * @param userName
 	 * @param Password
 	 */
+
 
 	void updatePassword(String userName, String Password);
 

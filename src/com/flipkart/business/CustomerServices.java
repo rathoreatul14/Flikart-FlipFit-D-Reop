@@ -4,6 +4,7 @@ import com.flipkart.bean.Customer;
 import com.flipkart.dao.CustomerDao;
 import com.flipkart.exception.BookingExistsException;
 import com.flipkart.exception.SlotFilledException;
+import com.flipkart.validator.UserValidator;
 import com.flipkart.bean.User;
 
 import java.util.*;
@@ -11,6 +12,7 @@ import java.util.*;
 public class CustomerServices implements CustomerServicesInterface {
 
 	CustomerDao dao = new CustomerDao();
+	UserValidator userValidator = new UserValidator();
 
 	// Registers a new customer
 	@Override
@@ -20,6 +22,19 @@ public class CustomerServices implements CustomerServicesInterface {
 		String name = sc.next();
 		System.out.println("Enter Email");
 		String email = sc.next();
+		
+		
+		// Adding email validator 
+		
+		while(!UserValidator.isValidEmail(email)) {
+			
+			System.out.println("Invalid Email : ");
+			System.out.println("Enter Email");
+			email = sc.next();
+			
+		}
+		
+		
 		System.out.println("Enter Address");
 		String address = sc.next();
 		System.out.println("Enter Mobile");
