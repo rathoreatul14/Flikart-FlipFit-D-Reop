@@ -84,18 +84,6 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 		// TODO Auto-generated method stub
 		try {
 		List<Gym> gyms =gymOwnerDao.viewGyms(owner);
-<<<<<<< Updated upstream
-		System.out.println("$ Your Registered Gyms ");
-			gyms.forEach(gym -> {System.out.println("Gym ID: " + gym.getGymID());
-		System.out.println("Gym Name: " + gym.getGymName());
-		System.out.println("Register Status: " + gym.getRegisterStatus());
-		System.out.println("Owner ID: " + gym.getGymOwnerID());
-		 System.out.println("------------------------------------------------");
-		});
-//		
-
-		
-=======
 		if(gyms.size()==0) {
 			System.out.println("No gyms added!");
 			return ;
@@ -120,7 +108,7 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 			System.out.println(Ex.getMessage());
 		}
 		return;
->>>>>>> Stashed changes
+
 	}
 
 
