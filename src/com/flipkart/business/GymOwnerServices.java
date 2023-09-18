@@ -37,7 +37,7 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 			GymOwner owner = new GymOwner(1,name,"NotApproved",aadhaarNumber,mobile,address,user.getUserID());
 			
 			gymOwnerDao.registerGymOwner(owner,user);
-			System.out.print("$ Gym Owner Registered Successfully ");
+			System.out.println("$ Gym Owner Registered Successfully ");
 			
 		}
 
@@ -81,6 +81,7 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 	public void viewGyms(GymOwner owner) {
 		// TODO Auto-generated method stub
 		List<Gym> gyms =gymOwnerDao.viewGyms(owner);
+		System.out.println("$ Your Registered Gyms ");
 			gyms.forEach(gym -> {System.out.println("Gym ID: " + gym.getGymID());
 		System.out.println("Gym Name: " + gym.getGymName());
 		System.out.println("Register Status: " + gym.getRegisterStatus());
