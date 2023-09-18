@@ -80,13 +80,14 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 	public void viewGyms(GymOwner owner) {
 		// TODO Auto-generated method stub
 		List<Gym> gyms =gymOwnerDao.viewGyms(owner);
-		for (Gym gym : gyms) {
-            System.out.println("Gym ID: " + gym.getGymID());
-            System.out.println("Gym Name: " + gym.getGymName());
-            System.out.println("Register Status: " + gym.getRegisterStatus());
-            System.out.println("Owner ID: " + gym.getGymOwnerID());
-            System.out.println("------------------------------------------------");
-        }
+			gyms.forEach(gym -> {System.out.println("Gym ID: " + gym.getGymID());
+		System.out.println("Gym Name: " + gym.getGymName());
+		System.out.println("Register Status: " + gym.getRegisterStatus());
+		System.out.println("Owner ID: " + gym.getGymOwnerID());
+		 System.out.println("------------------------------------------------");
+		});
+//		
+
 		
 	}
 
