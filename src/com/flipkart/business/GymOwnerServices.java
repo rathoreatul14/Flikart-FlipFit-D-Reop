@@ -97,9 +97,48 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 	public void registerGym(Scanner in, GymOwner owner) {
 		// TODO Auto-generated method stub
 		
-		gymOwnerDao.registerGym(in, owner);
+		//SlotServicesInterface slotService = new SlotServices();
+		
+		int gymID = gymOwnerDao.registerGym(in, owner);
+		
+	
+		int gymOwnerId = owner.getId();
+	
+		
+		System.out.println("Enetr Slots details : ");
+		
+		boolean exit = true;
+		
+		int slotcnt =  0;
+		
+		while(exit) {
+			
+			System.out.println("Options 1: Add a slot  2: Exit");
+			
+			int option = in.nextInt();
+			
+			if(option == 1) {
+				
+				//slotService.addSlots(gymID);
+				
+				System.out.println("Slot added successfully");
+				
+				slotcnt++;
+				
+			}else {
+				if(slotcnt < 1) {
+					System.out.println("Atleast one slot must be added: ");
+					
+				}else {
+					break;
+				}
+			}	
+		}
 		
 	}
+	
+	
+	
 	
 
 }

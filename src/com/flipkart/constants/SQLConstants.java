@@ -37,7 +37,7 @@ public class SQLConstants {
 	public static final String SQL_APPR_ALL_GYM_QUERY = "Update Gym Set Approved = 1";
 	
 	public static final String SQL_FETCH_SING_OWNER_DET_QUERY = "Select * From GymOwner Where GymOwnerId = (?)";
-	public static final String SQL_FETCH_OWNER_GYM_DET_QUERY = "Select * From Gyms Where GymOwnerId = (?)";
+	public static final String SQL_FETCH_OWNER_GYM_DET_QUERY = "Select * From Gym Where owner = (?)";
 	public static final String SQL_FETCH_GYMOWNER_USING_USERID_QUERY = "Select * From GymOwner Where UserId = (?)";
 	public static final String SQL_FETCH_OWNER_APPROVAL_QUERY = "Select Approved From GymOwner Where GymOwnerId = (?)";
 	public static final String SQL_SIZE_GYM_QUERY = "Select Count(*) From Gym";
@@ -86,6 +86,9 @@ public class SQLConstants {
 
 
 	public static final String SQL_INSERTING_GYM = "Insert Into Gym (Name,Address,Owner) Values (?,?,?)";
+
+
+	public static final String SQL_FETCHING_INSERTING_GYM = "Select GymId from Gym where owner = (?) AND name = (?)";
 
 
 

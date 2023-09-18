@@ -1,6 +1,6 @@
 package com.flipkart.business;
 
-public class SlotServices {
+public class SlotServices{
 
 
 }

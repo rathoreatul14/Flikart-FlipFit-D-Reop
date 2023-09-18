@@ -107,9 +107,9 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 			System.out.println(owner.getUserId());
 			ResultSet output = stmt.executeQuery();
 			System.out.println(output);
-			System.out.println("\tName\tStatus\tAadharNumber\tContact\tAddress\tId");
+			System.out.println("\tName\tStatus\tAadharNumber\tContact\tAddress");
 			while (output.next()) {
-				System.out.println( "\t " + output.getString(2)+"\t " +output.getString(3)+"\t " +output.getString(4)+"\t"+output.getString(5)+output.getString(6));
+				System.out.println( "\t " + output.getString(2)+"\t " +output.getString(3)+"\t " +output.getString(4)+"\t"+output.getString(5)+ "\t" + output.getString(6));
 			}
 		} catch (SQLException sqlExcep) {
 			System.out.println(sqlExcep);
@@ -160,16 +160,25 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_OWNER_GYM_DET_QUERY);
 			stmt.setInt(1, owner.getId());
 			ResultSet resultSet = stmt.executeQuery();
+			int cntGym = 0;
 			 while (resultSet.next()) {
-	                int gymID = resultSet.getInt("gymID");
-	                String gymName = resultSet.getString("gymName");
-	                String registerStatus = resultSet.getString("registerStatus");
+				 
+				    cntGym++;
+	                int gymID = resultSet.getInt("GymID");
+	                String gymName = resultSet.getString("Name");
+	                String registerStatus = resultSet.getString("Approved");
 	                
 	                
 	                // Create a Gym object and add it to the list
 	                Gym gym = new Gym(gymID, gymName, registerStatus);
 	                gyms.add(gym);
-	            }
+	        }
+			 
+			 
+			 if(cntGym < 1) {
+				 System.out.println("No Gym Added Yet");
+			 }
+			 
 		} catch (SQLException sqlExcep) {
 			System.out.println(sqlExcep);
 		} catch (Exception excep) {
@@ -179,7 +188,7 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 		
 	}
 	@Override
-	public void registerGym(Scanner in, GymOwner owner) {
+	public int registerGym(Scanner in, GymOwner owner) {
 		// TODO Auto-generated method stub
 		
 		
@@ -190,6 +199,8 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 		
 		System.out.println("Enter Gym Address: ");
 		String gymAddress = in.next();
+		
+		int gymID;
 		
 		
 		Connection conn = null;
@@ -202,6 +213,13 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 			stmt.setString(2, gymAddress);
 			stmt.setInt(3, gymOwnerId);
 			stmt.executeUpdate();
+			stmt = conn.prepareStatement(SQLConstants.SQL_FETCHING_INSERTING_GYM);
+			stmt.setInt(1, gymOwnerId);
+			stmt.setString(2, gymName);
+			ResultSet resultSet = stmt.executeQuery();
+			resultSet.next();
+			gymID = resultSet.getInt(1);
+			return gymID;
 			
 			 
 		} catch (SQLException sqlExcep) {
@@ -210,17 +228,10 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 			excep.printStackTrace();
 		}
 		
+		return 0;
 		
 	}
 	
-	@Override
-	
-	public void addSlots(Scanner in, int gymOwnerId, int gymId) {
-		
-		System.out.println("Enter Slot time: ");
-		time  = in.next();
-		
-	}
 	
 	
 }

@@ -25,7 +25,7 @@ public interface GymOwnerDaoInterface {
 
 	public List<Gym> viewGyms(GymOwner owner);
 
-	public void registerGym(Scanner in, GymOwner owner);
+	public int registerGym(Scanner in, GymOwner owner);
 
 	void addSlots(Scanner in, int gymOwnerId, int gymId);
 	
