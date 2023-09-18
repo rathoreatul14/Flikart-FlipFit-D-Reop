@@ -7,9 +7,4 @@ public interface SlotDaoInterface {
 	public void addSlot(Slot slot);
 	
 	public void deleteSlot(int SlotId);
-
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
