@@ -59,13 +59,7 @@ public class SlotDao implements SlotDaoInterface {
 		PreparedStatement stmt = null;
 
 		try {
-			// Getting customer Id
 			conn = DBUtils.getConnection();
-
-//		    user.setUserName(Integer.toString(count));
-
-			// Registering in Customer schema
-
 			stmt = conn.prepareStatement(SQLConstants.SQL_DELETE_SLOT_QUERY);
 			stmt.setInt(1, SlotId);
 			int rowsUpdated=stmt.executeUpdate();
@@ -82,6 +76,5 @@ public class SlotDao implements SlotDaoInterface {
 		}
 		
 	}
-	
-
 }
+	

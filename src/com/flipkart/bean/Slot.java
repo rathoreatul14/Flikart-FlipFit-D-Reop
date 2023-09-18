@@ -1,20 +1,25 @@
 package com.flipkart.bean;
 
+import java.sql.Time;
+import java.time.LocalTime;
+
 import jdk.jfr.Timestamp;
 
 public class Slot {
     private int slotId;
     private int gymId;
-    private Timestamp startTime;
+    private LocalTime slotTime;
     private int numberOfSeats;
-    private int availableSeats;
+    private String slotDate;
+    private int capacity;
 
-    public Slot(int slotId, int gymId, Timestamp startTime, int numberOfSeats, int availableSeats) {
+    public Slot(int slotId, int gymId, LocalTime slotTime, int numberOfSeats, String slotDate, int capacity) {
         this.slotId = slotId;
         this.gymId = gymId;
-        this.startTime = startTime;
+        this.slotTime = slotTime;
+        this.slotDate =slotDate;
         this.numberOfSeats = numberOfSeats;
-        this.availableSeats = availableSeats;
+        this.capacity = capacity;
     }
 
     public int getSlotId() {
@@ -33,27 +38,43 @@ public class Slot {
         this.gymId = gymId;
     }
 
-    public Timestamp getStartTime() {
-        return startTime;
-    }
 
-    public void setStartTime(Timestamp startTime) {
-        this.startTime = startTime;
-    }
 
-    public int getNumberOfSeats() {
-        return numberOfSeats;
-    }
+	public LocalTime getSlotTime() {
+		return slotTime;
+	}
 
-    public void setNumberOfSeats(int numberOfSeats) {
-        this.numberOfSeats = numberOfSeats;
-    }
+	public void setSlotTime(LocalTime slotTime) {
+		this.slotTime = slotTime;
+	}
 
-    public int getAvailableSeats() {
-        return availableSeats;
-    }
+	public int getNumberOfSeats() {
+		return numberOfSeats;
+	}
 
-    public void setAvailableSeats(int availableSeats) {
-        this.availableSeats = availableSeats;
-    }
+	public void setNumberOfSeats(int numberOfSeats) {
+		this.numberOfSeats = numberOfSeats;
+	}
+
+	public String getSlotDate() {
+		return slotDate;
+	}
+
+	public void setSlotDate(String slotDate) {
+		this.slotDate = slotDate;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public Slot() {
+		super();
+	}
+
+
 }

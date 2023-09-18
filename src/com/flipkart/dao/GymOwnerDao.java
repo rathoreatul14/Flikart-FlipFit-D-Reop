@@ -107,7 +107,7 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 			System.out.println(owner.getUserId());
 			ResultSet output = stmt.executeQuery();
 			System.out.println(output);
-			System.out.println("\tName\tStatus\tAadharNumber\tContact\tAddress");
+			System.out.println("\tName\t\tStatus\t\tAadharNumber\tContact\tAddress");
 			while (output.next()) {
 				System.out.println( "\t " + output.getString(2)+"\t " +output.getString(3)+"\t " +output.getString(4)+"\t"+output.getString(5)+ "\t" + output.getString(6));
 			}

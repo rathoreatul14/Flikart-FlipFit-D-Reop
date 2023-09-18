@@ -14,11 +14,12 @@ import com.flipkart.dao.SlotDaoInterface;
 /**
  * 
  */
+
 public class SlotServices implements SlotServicesInterface {
 	Scanner sc = new Scanner(System.in);
 	SlotDaoInterface slotDao = new SlotDao();
 	@Override
-	public void addSlot(int gymOwnerId) {
+	public void addSlot(int gymId) {
 		// TODO Auto-generated method stub
 		System.out.println("Enter Slot Details ");
 		System.out.println("Enter SlotTime in this format (hh:mm:ss)");
@@ -31,7 +32,7 @@ public class SlotServices implements SlotServicesInterface {
 		System.out.println("Capacity");
 		int capacity =sc.nextInt();
 		
-		Slot slot=new Slot(1,gymOwnerId,lt,seats,date,capacity);
+		Slot slot=new Slot(1,gymId,lt,seats,date,capacity);
 		 
 		slotDao.addSlot(slot);
 		

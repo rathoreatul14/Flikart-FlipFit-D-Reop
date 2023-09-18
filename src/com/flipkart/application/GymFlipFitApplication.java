@@ -31,7 +31,7 @@ public class GymFlipFitApplication {
 		while (choice!=6) {
 
 			System.out.println("\nMenu:-");
-			System.out.println("\t1. Login\n" + "\t2. Admin Login\n" + "\t3. Customer Registration\n" + "\t4. GymOwner Registration" + "\t5. Exit\n");
+			System.out.println("\t1. Login\n" + "\t2. Admin Login\n" + "\t3. Customer Registration\n" + "\t4. GymOwner Registration\n" + "\t5. Exit\n");
 
 			System.out.print("$ Enter your choice: ");
 

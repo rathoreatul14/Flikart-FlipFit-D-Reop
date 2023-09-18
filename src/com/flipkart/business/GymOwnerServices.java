@@ -118,8 +118,9 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 			int option = in.nextInt();
 			
 			if(option == 1) {
+				SlotServicesInterface slotService =new SlotServices();
 				
-				//slotService.addSlots(gymID);
+				slotService.addSlot(gymID);
 				
 				System.out.println("Slot added successfully");
 				

@@ -64,13 +64,13 @@ public class AdminDao implements AdminDaoInterface{
 		   try {
 			   conn = DBUtils.getConnection();
 			   
-			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_GYM_QUERY);
+			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_GYM_QUERY_ADMIN);
 			   ResultSet output = stmt.executeQuery();
 
 			   if (output.next()) {
 				   System.out.println("\n\tID\tGym Name\tStatus");
 			       do {
-			           System.out.println("\t" + output.getInt(1) + " \t " + output.getString(2)+ " \t " + output.getInt(5));
+			           System.out.println("\t" + output.getInt(1) + " \t " + output.getString(2)+ " \t\t" + output.getInt(5));
 			       } while (output.next());
 			   } else {
 			       System.out.println("No gyms available");

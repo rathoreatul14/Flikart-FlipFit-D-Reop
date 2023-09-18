@@ -26,6 +26,7 @@ public class SQLConstants {
 
 	
 	public static final String SQL_FETCH_ALL_OWNER_QUERY = "Select * From GymOwner";
+	public static final String SQL_FETCH_ALL_GYM_QUERY_ADMIN = "Select * From Gym";
 	public static final String SQL_FETCH_ALL_GYM_QUERY = "Select * From Gym Where Approved = 1";
 	public static final String SQL_FETCH_PENDING_OWNER_REQ_QUERY = "Select * From GymOwner Where Approved = 0";
 	public static final String SQL_FETCH_PENDING_GYM_REQ_QUERY = "Select * From Gym Where Approved = 0";
@@ -73,7 +74,7 @@ public class SQLConstants {
 	public static final String SQL_DATE_CHECK_FROM_SLOTID = "SELECT SlotDate, SlotTime from Slot WHERE SlotId = (?)";
 	public static final String SQL_FETCH_SLOTID_FOR_CUSTOMER = "SELECT * from Booking  WHERE CustomerId = (?)"; 
 	public static final String SQL_DELETE_QUERY_FOR_CUST_IN_Booking  = "DELETE from Booking  Where CustomerId = (?) And SlotDate = (?) And SlotTime = (?)";
-	public static final String SQL_ADD_SLOT_QUERY = "Insert into slot (Capacity,SlotDate,SlotTime,GymownerId) values(?,?,?,?,?)";
+	public static final String SQL_ADD_SLOT_QUERY = "Insert into slot (Capacity,SlotDate,SlotTime,GymId) values(?,?,?,?)";
 	public static final String SQL_DELETE_SLOT_QUERY="Delete from slot where SlotId=(?)";
 
 	
@@ -90,6 +91,8 @@ public class SQLConstants {
 
 
 	public static final String SQL_FETCHING_INSERTING_GYM = "Select GymId from Gym where owner = (?) AND name = (?)";
+
+
 
 
 
