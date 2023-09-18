@@ -8,7 +8,7 @@ public class GymFlipFitAdminMenu {
 
 	public void adminActionPage(Scanner in) {
 		
-		System.out.println("\nWelcome to FlipFit Gym Application");
+		System.out.println("\nWelcome to FlipFit Admin Application");
 		
 		AdminServicesInterface adminService = new AdminServices();
 

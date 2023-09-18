@@ -12,11 +12,10 @@ public class Gym {
 	private int gymOwnerID;
 	
 	
-	public Gym(int gymID, String gymName, List<Integer> slotIDs, String registerStatus, int gymOwnerID) {
+	public Gym(int gymID, String gymName, String registerStatus, int gymOwnerID) {
 		super();
 		this.gymID = gymID;
 		this.gymName = gymName;
-		this.slotIDs = slotIDs;
 		this.registerStatus = registerStatus;
 		this.gymOwnerID = gymOwnerID;
 	}

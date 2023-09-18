@@ -27,18 +27,11 @@ public class SlotServices implements SlotServicesInterface {
 		LocalTime lt=LocalTime.parse(time); 
 		System.out.println("Enter Slot Date");
 		String date =sc.next();
-		System.out.println("Number of Seats");
-		int seats =sc.nextInt();
 		System.out.println("Capacity");
 		int capacity =sc.nextInt();
-		
-		Slot slot=new Slot(1,gymId,lt,seats,date,capacity);
+		Slot slot=new Slot(1,gymId,lt,0,date,capacity);
 		 
 		slotDao.addSlot(slot);
-		
-		
-		
-
 	}
 
 	@Override

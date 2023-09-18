@@ -17,6 +17,7 @@ import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DBUtils;
+import com.flipkart.utils.OutputFormatter;
 
 /**
  * @author msaikalyan.yadav
@@ -104,13 +105,18 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 			conn = DBUtils.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYMOWNER_QUERY);
 			stmt.setInt(1, owner.getUserId());
-			System.out.println(owner.getUserId());
 			ResultSet output = stmt.executeQuery();
-			System.out.println(output);
-			System.out.println("\tName\t\tStatus\t\tAadharNumber\tContact\tAddress");
+			List<String> headers = new ArrayList<>();
+	        headers.add("Name");
+	        headers.add("Status");
+	        headers.add("AadharNumber");
+	        headers.add("Contact");
+	        headers.add("Address");
+	        List<List> data = new ArrayList<>();
 			while (output.next()) {
-				System.out.println( "\t " + output.getString(2)+"\t " +output.getString(3)+"\t " +output.getString(4)+"\t"+output.getString(5)+ "\t" + output.getString(6));
+				data.add(List.of(output.getString(2), output.getString(3), output.getString(4), output.getString(5), output.getString(6)));
 			}
+			OutputFormatter.outputData(headers, data);
 		} catch (SQLException sqlExcep) {
 			System.out.println(sqlExcep);
 		} catch (Exception excep) {
@@ -167,17 +173,12 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 	                int gymID = resultSet.getInt("GymID");
 	                String gymName = resultSet.getString("Name");
 	                String registerStatus = resultSet.getString("Approved");
-	                
+	                int gymOwnerId = resultSet.getInt("Owner");
 	                
 	                // Create a Gym object and add it to the list
-	                Gym gym = new Gym(gymID, gymName, registerStatus);
+	                Gym gym = new Gym(gymID, gymName, registerStatus, gymOwnerId);
 	                gyms.add(gym);
 	        }
-			 
-			 
-			 if(cntGym < 1) {
-				 System.out.println("No Gym Added Yet");
-			 }
 			 
 		} catch (SQLException sqlExcep) {
 			System.out.println(sqlExcep);
