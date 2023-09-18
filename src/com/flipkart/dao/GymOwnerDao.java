@@ -233,6 +233,5 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 	}
 	
 	
-	
 }
 		
