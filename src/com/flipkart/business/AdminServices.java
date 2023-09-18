@@ -15,7 +15,8 @@ public class AdminServices implements AdminServicesInterface{
 	AdminDao dao = new AdminDao();
 	Scanner sc= new Scanner(System.in);
 	UserDao userdao = new UserDao();
-	
+
+	// Prints details of an admin
 	@Override
 	public void viewProfile() {
 		// TODO Auto-generated method stub
@@ -24,6 +25,7 @@ public class AdminServices implements AdminServicesInterface{
 		dao.fetchProfile(username);
 	}
 
+	// Updates password of admin
 	@Override
 	public void updatePassword() {
 		// TODO Auto-generated method stub
@@ -43,20 +45,23 @@ public class AdminServices implements AdminServicesInterface{
 		}
 	}
 
+	// Prints details of all gyms
 	@Override
 	public void viewAllGyms() {
 		
 		dao.viewAllGyms();
 		
 	}
-	
+
+	// Prints details of all gym owners
 	@Override
 	public void viewAllGymOwners() {
 		
 		dao.viewAllGymOwners();
 		
 	}
-	
+
+	// Approve gym owner registration request
 	@Override
 	public void approveGymOwner() {
 		// TODO Auto-generated method stub
@@ -87,6 +92,7 @@ public class AdminServices implements AdminServicesInterface{
 		   
 	}
 
+	// Approve gym registration request
 	@Override
 	public void approveGym() {
 		// TODO Auto-generated method stub
@@ -115,12 +121,14 @@ public class AdminServices implements AdminServicesInterface{
 		
 	}
 
+	// Prints the list of unapproved gym owners 
 	@Override
 	public void viewPendingGymOwner() {
 
 		dao.viewPendingGymOwner();
 	}
 
+	// Prints the list of unapproved gyms
 	@Override
 	public void viewPendingGym() {
 	
