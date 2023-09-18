@@ -37,6 +37,7 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 			GymOwner owner = new GymOwner(1,name,"NotApproved",aadhaarNumber,mobile,address,user.getUserID());
 			
 			gymOwnerDao.registerGymOwner(owner,user);
+			System.out.print("$ Gym Owner Registered Successfully ");
 			
 		}
 
