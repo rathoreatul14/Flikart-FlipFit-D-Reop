@@ -73,7 +73,8 @@ public class SQLConstants {
 	public static final String SQL_DATE_CHECK_FROM_SLOTID = "SELECT SlotDate, SlotTime from Slot WHERE SlotId = (?)";
 	public static final String SQL_FETCH_SLOTID_FOR_CUSTOMER = "SELECT * from Booking  WHERE CustomerId = (?)"; 
 	public static final String SQL_DELETE_QUERY_FOR_CUST_IN_Booking  = "DELETE from Booking  Where CustomerId = (?) And SlotDate = (?) And SlotTime = (?)";
-
+	public static final String SQL_ADD_SLOT_QUERY = "Insert into slot (Capacity,SlotDate,SlotTime,GymownerId) values(?,?,?,?,?)";
+	public static final String SQL_DELETE_SLOT_QUERY="Delete from slot where SlotId=(?)";
 
 	
 	
