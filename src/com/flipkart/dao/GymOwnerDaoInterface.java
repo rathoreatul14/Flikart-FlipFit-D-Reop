@@ -4,6 +4,7 @@
 package com.flipkart.dao;
 
 import java.util.List;
+import java.util.Scanner;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
@@ -23,6 +24,10 @@ public interface GymOwnerDaoInterface {
 	public void updateProfile(GymOwner owner);
 
 	public List<Gym> viewGyms(GymOwner owner);
+
+	public void registerGym(Scanner in, GymOwner owner);
+
+	void addSlots(Scanner in, int gymOwnerId, int gymId);
 	
 	
 	

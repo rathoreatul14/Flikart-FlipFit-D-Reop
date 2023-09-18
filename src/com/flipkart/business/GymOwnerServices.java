@@ -97,6 +97,9 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 	public void registerGym(Scanner in, GymOwner owner) {
 		// TODO Auto-generated method stub
 		
+		gymOwnerDao.registerGym(in, owner);
+		
 	}
+	
 
 }

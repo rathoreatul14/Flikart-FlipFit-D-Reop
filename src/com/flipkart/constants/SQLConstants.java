@@ -85,6 +85,9 @@ public class SQLConstants {
 	public static final String SQL_UPDATE_BOOKING = "UPDATE Booking SET SlotId = (?) WHERE BookingId = (?)";
 
 
+	public static final String SQL_INSERTING_GYM = "Insert Into Gym (Name,Address,Owner) Values (?,?,?)";
+
+
 
 	
 	

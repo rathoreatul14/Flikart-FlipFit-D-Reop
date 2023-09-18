@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
@@ -175,6 +176,49 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 			excep.printStackTrace();
 		}
 		return gyms;
+		
+	}
+	@Override
+	public void registerGym(Scanner in, GymOwner owner) {
+		// TODO Auto-generated method stub
+		
+		
+		int gymOwnerId = owner.getId();
+		
+		System.out.println("Enter Gym Name: ");
+		String gymName = in.next();
+		
+		System.out.println("Enter Gym Address: ");
+		String gymAddress = in.next();
+		
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		try {
+			conn = DBUtils.getConnection();
+			stmt = conn.prepareStatement(SQLConstants.SQL_INSERTING_GYM);
+			stmt.setString(1, gymName);
+			stmt.setString(2, gymAddress);
+			stmt.setInt(3, gymOwnerId);
+			stmt.executeUpdate();
+			
+			 
+		} catch (SQLException sqlExcep) {
+			System.out.println(sqlExcep);
+		} catch (Exception excep) {
+			excep.printStackTrace();
+		}
+		
+		
+	}
+	
+	@Override
+	
+	public void addSlots(Scanner in, int gymOwnerId, int gymId) {
+		
+		System.out.println("Enter Slot time: ");
+		time  = in.next();
 		
 	}
 	
