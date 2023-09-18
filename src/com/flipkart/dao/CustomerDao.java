@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DBUtils;
+import com.flipkart.utils.OutputFormatter;
 import com.flipkart.bean.*;
 
 public class CustomerDao implements CustomerDaoInterface{
@@ -108,11 +111,16 @@ public class CustomerDao implements CustomerDaoInterface{
 			stmt.setInt(1, customer.getCustomerID());
 
 			ResultSet output = stmt.executeQuery();
-			System.out.println("\tName\tAddress\tEmail");
+			List<String> headers = new ArrayList<>();
+	        headers.add("Name");
+	        headers.add("Address");
+	        headers.add("Email");
+
+	        List<List> data = new ArrayList<>();
 			while (output.next()) {
-				System.out.println(
-						"\t " + output.getString(2) + "\t " + output.getString(5) + "\t " + output.getString(4));
+				data.add(List.of(output.getString(2), output.getString(5), output.getString(4)));
 			}
+			OutputFormatter.outputData(headers, data);
 		} catch (SQLException sqlExcep) {
 			System.out.println(sqlExcep);
 		} catch (Exception excep) {
@@ -136,11 +144,19 @@ public class CustomerDao implements CustomerDaoInterface{
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_GYM_QUERY);
 
 			ResultSet output = stmt.executeQuery();
-			System.out.println("\tGymID\tName\tAddress");
+//			System.out.println("\tGymID\tName\tAddress");
+			List<String> headers = new ArrayList<>();
+	        headers.add("GymID");
+	        headers.add("Name");
+	        headers.add("Address");
+
+	        List<List> data = new ArrayList<>();
 			while (output.next()) {
-				System.out.println(
-						"\t " + output.getString(1) + "\t " + output.getString(2) + "\t " + output.getString(3));
+//				System.out.println(
+//						"\t " + output.getString(1) + "\t " + output.getString(2) + "\t " + output.getString(3));
+				data.add(List.of(output.getString(1), output.getString(2), output.getString(3)));
 			}
+			OutputFormatter.outputData(headers, data);
 		} catch (SQLException sqlExcep) {
 //		       System.out.println(sqlExcep);
 		} catch (Exception excep) {

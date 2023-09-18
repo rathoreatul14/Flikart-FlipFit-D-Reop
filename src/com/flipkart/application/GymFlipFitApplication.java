@@ -1,6 +1,7 @@
 package com.flipkart.application;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -31,7 +32,7 @@ public class GymFlipFitApplication {
 		while (choice!=6) {
 
 			System.out.println("\nMenu:-");
-			System.out.println("\t1. Login\n" + "\t2. Admin Login\n" + "\t3. Customer Registration\n" + "\t4. GymOwner Registration\n" + "\t5. Exit\n");
+			System.out.println("\t1. Login\n" + "\t2. Customer Registration\n" + "\t3. GymOwner Registration\n" + "\t4. Exit\n");
 
 			System.out.print("$ Enter your choice: ");
 
@@ -44,20 +45,15 @@ public class GymFlipFitApplication {
 					openLoginMenu(in);
 					break;
 				case 2:
-					openLoginMenu(in);
-//					GymFlipFitAdminMenu admin = new GymFlipFitAdminMenu();
-//					admin.adminActionPage(in);
-					break;
-				case 3:
 					CustomerServicesInterface customerService=new CustomerServices();
 					customerService.registerCustomer(in);
 					break;
-				case 4:
+				case 3:
 					GymOwnerServicesInterface gymServices = new GymOwnerServices();
 					gymServices.registerGymOwner(in);
 					
 					break;
-				case 5:
+				case 4:
 					System.out.println("Logged Out Successfully...");
 //					System.exit(0);
 					break;
@@ -94,9 +90,9 @@ public class GymFlipFitApplication {
 			return;
 		}
 		String role = user.getRole();
-//		LocalDate localDate = LocalDate.now();
-//		System.out.println(localDate.getDayOfMonth() + "/" + localDate.getMonth() + "/" + localDate.getYear());
-		System.out.println("Hello!! ");
+		LocalTime localTime = LocalTime.now();
+		System.out.println("User logged in at " + localTime + "\n");
+		System.out.println("Hello " + user.getName() + "!");
 		switch (role) {
 			case "admin": 
 				GymFlipFitAdminMenu admin = new GymFlipFitAdminMenu();

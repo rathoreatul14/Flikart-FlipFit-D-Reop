@@ -1,5 +1,6 @@
 package com.flipkart.business;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 /**
@@ -11,6 +12,7 @@ import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
 import com.flipkart.dao.GymOwnerDao;
 import com.flipkart.dao.GymOwnerDaoInterface;
+import com.flipkart.utils.OutputFormatter;
 
 public class GymOwnerServices implements GymOwnerServicesInterface{
 	GymOwnerDaoInterface gymOwnerDao = new GymOwnerDao();
@@ -30,15 +32,14 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 			String aadhaarNumber = in.next();
 			System.out.print("$ Enter your gstNumber: ");
 			String gstNumber = in.next();
-			System.out.print("$ Enter your role: ");
-			String role = in.next();
 			System.out.print("Enter your Password: ");
 			String password = in.next();
-			User user = new User(1,name,email,role,password);
+			User user = new User(1,name,email,"gymOwner",password);
 			
 			GymOwner owner = new GymOwner(1,name,"NotApproved",aadhaarNumber,mobile,address,user.getUserID());
 			
 			gymOwnerDao.registerGymOwner(owner,user);
+			System.out.println("$ Gym Owner Registered Successfully ");
 			
 		}
 
@@ -81,15 +82,33 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 	@Override
 	public void viewGyms(GymOwner owner) {
 		// TODO Auto-generated method stub
+		try {
 		List<Gym> gyms =gymOwnerDao.viewGyms(owner);
+		if(gyms.size()==0) {
+			System.out.println("No gyms added!");
+			return ;
+		}
+		List<String> headers = new ArrayList<>();
+        headers.add("GymID");
+        headers.add("Name");
+        headers.add("Register Status");
+        headers.add("Owner ID");
+
+        List<List> data = new ArrayList<>();
 		for (Gym gym : gyms) {
-            System.out.println("Gym ID: " + gym.getGymID());
-            System.out.println("Gym Name: " + gym.getGymName());
-            System.out.println("Register Status: " + gym.getRegisterStatus());
-            System.out.println("Owner ID: " + gym.getGymOwnerID());
-            System.out.println("------------------------------------------------");
+			String registrationStatus = "Not Approved";
+			if(gym.getRegisterStatus()=="1") {
+				registrationStatus = "Approved";
+			}
+            data.add(List.of(gym.getGymID(), gym.getGymName(), registrationStatus, gym.getGymOwnerID()));
         }
-		
+		OutputFormatter.outputData(headers, data);
+		}
+		catch(Exception Ex) {
+			System.out.println(Ex.getMessage());
+		}
+		return;
+
 	}
 
 
@@ -105,7 +124,7 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 		int gymOwnerId = owner.getId();
 	
 		
-		System.out.println("Enetr Slots details : ");
+		System.out.println("Enter Slots details : ");
 		
 		boolean exit = true;
 		
@@ -113,7 +132,7 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 		
 		while(exit) {
 			
-			System.out.println("Options 1: Add a slot  2: Exit");
+			System.out.println("Options:\n\t1.Add a slot.\n\t2.Exit");
 			
 			int option = in.nextInt();
 			

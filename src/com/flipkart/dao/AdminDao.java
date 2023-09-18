@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DBUtils;
+import com.flipkart.utils.OutputFormatter;
 
 public class AdminDao implements AdminDaoInterface{
 	
@@ -91,12 +94,19 @@ public class AdminDao implements AdminDaoInterface{
 			   
 			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_OWNER_QUERY);
 			   ResultSet output = stmt.executeQuery();
+			   
+			    List<String> headers = new ArrayList<>();
+		        headers.add("Owner Id");
+		        headers.add("Name");
+		        headers.add("Status");
 
 			   if (output.next()) {
-			       System.out.println("\n\tID\tGymOwner Name\tStatus");
-			       do {
-			           System.out.println("\t" + output.getString(1) + " \t " + output.getString(2)+ " \t " + output.getString(3));
-			       } while (output.next());
+			       List<List> data = new ArrayList<>();
+			       data.add(List.of(output.getInt(1), output.getString(2), output.getString(3)));
+			       while (output.next()){
+			    	   data.add(List.of(output.getInt(1), output.getString(2), output.getString(3)));
+			       }
+			       OutputFormatter.outputData(headers, data);
 			   } else {
 			       System.out.println("No gym owner registered yet");
 			   }
