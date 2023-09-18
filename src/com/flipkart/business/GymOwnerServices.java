@@ -30,11 +30,9 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 			String aadhaarNumber = in.next();
 			System.out.print("$ Enter your gstNumber: ");
 			String gstNumber = in.next();
-			System.out.print("$ Enter your role: ");
-			String role = in.next();
 			System.out.print("Enter your Password: ");
 			String password = in.next();
-			User user = new User(1,name,email,role,password);
+			User user = new User(1,name,email,"gymOwner",password);
 			
 			GymOwner owner = new GymOwner(1,name,"NotApproved",aadhaarNumber,mobile,address,user.getUserID());
 			
