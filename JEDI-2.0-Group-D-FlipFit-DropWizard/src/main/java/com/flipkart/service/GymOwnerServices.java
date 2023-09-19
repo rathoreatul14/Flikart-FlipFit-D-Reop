@@ -103,53 +103,49 @@ public class GymOwnerServices implements GymOwnerServicesInterface{
 	}
 
 
-	@Override
-	public void registerGym(Scanner in, GymOwner owner) {
-		// TODO Auto-generated method stub
-
-		//SlotServicesInterface slotService = new SlotServices();
-
-		int gymID = gymOwnerDao.registerGym(in, owner);
-
-
-		int gymOwnerId = owner.getId();
-
-
-		System.out.println("Enter Slots details : ");
-
-		boolean exit = true;
-
-		int slotcnt =  0;
-
-		while(exit) {
-
-			System.out.println("Options:\n\t1.Add a slot.\n\t2.Exit");
-
-			int option = in.nextInt();
-
-			if(option == 1) {
-				SlotServicesInterface slotService =new SlotServices();
-
-				slotService.addSlot(gymID);
-
-				System.out.println("Slot added successfully");
-
-				slotcnt++;
-
-			}else {
-				if(slotcnt < 1) {
-					System.out.println("Atleast one slot must be added: ");
-
-				}else {
-					break;
-				}
-			}
-		}
-
-	}
-
-
-
-
-
+//	@Override
+//	public String registerGym(Gym gym) {
+//		// TODO Auto-generated method stub
+//
+//		//SlotServicesInterface slotService = new SlotServices();
+//
+//		int gymID = gymOwnerDao.registerGym(gym);
+//
+//
+////		int gymOwnerId = owner.getId();
+////
+////
+////		System.out.println("Enter Slots details : ");
+////
+////		boolean exit = true;
+////
+////		int slotcnt =  0;
+////
+////		while(exit) {
+////
+////			System.out.println("Options:\n\t1.Add a slot.\n\t2.Exit");
+////
+////			int option = in.nextInt();
+////
+////			if(option == 1) {
+////				SlotServicesInterface slotService =new SlotServices();
+////
+////				slotService.addSlot(gymID);
+////
+////				System.out.println("Slot added successfully");
+////
+////				slotcnt++;
+////
+////			}else {
+////				if(slotcnt < 1) {
+////					System.out.println("Atleast one slot must be added: ");
+////
+////				}else {
+////					break;
+////				}
+////			}
+////		}
+//
+//
+//	}
 }

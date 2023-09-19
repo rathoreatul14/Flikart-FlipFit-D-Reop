@@ -55,7 +55,7 @@ public interface GymOwnerDaoInterface {
     	*@return GymId after Registration is successfully
  	*/
 
-	public int registerGym(Scanner in, GymOwner owner);
+	public int registerGym(Gym gym);
 	
 	
 }

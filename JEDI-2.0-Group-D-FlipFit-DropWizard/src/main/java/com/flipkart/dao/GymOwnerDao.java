@@ -19,7 +19,6 @@ import com.flipkart.bean.User;
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DatabaseConnector;
 import com.flipkart.utils.OutputFormatter;
-import com.sun.org.apache.bcel.internal.generic.ARETURN;
 
 /**
  * @author msaikalyan.yadav
@@ -175,9 +174,10 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 	                String gymName = resultSet.getString("Name");
 	                String registerStatus = resultSet.getString("Approved");
 	                int gymOwnerId = resultSet.getInt("Owner");
+					String address = resultSet.getString("address");
 	                
 	                // Create a Gym object and add it to the list
-	                Gym gym = new Gym(gymID, gymName, registerStatus, gymOwnerId);
+	                Gym gym = new Gym(gymID, gymName,address, registerStatus, gymOwnerId);
 	                gyms.add(gym);
 	        }
 			 
@@ -190,47 +190,34 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 		
 	}
 	@Override
-	public int registerGym(Scanner in, GymOwner owner) {
+	public int registerGym(Gym gym) {
 		// TODO Auto-generated method stub
-		
-		
-		int gymOwnerId = owner.getId();
-		
-		System.out.println("Enter Gym Name: ");
-		String gymName = in.next();
-		
-		System.out.println("Enter Gym Address: ");
-		String gymAddress = in.next();
-		
-		int gymID;
-		
-		
 		Connection conn = null;
 		PreparedStatement stmt = null;
-
-		try {
-			conn = DatabaseConnector.getConnection();
-			stmt = conn.prepareStatement(SQLConstants.SQL_INSERTING_GYM);
-			stmt.setString(1, gymName);
-			stmt.setString(2, gymAddress);
-			stmt.setInt(3, gymOwnerId);
-			stmt.executeUpdate();
-			stmt = conn.prepareStatement(SQLConstants.SQL_FETCHING_INSERTING_GYM);
-			stmt.setInt(1, gymOwnerId);
-			stmt.setString(2, gymName);
-			ResultSet resultSet = stmt.executeQuery();
-			resultSet.next();
-			gymID = resultSet.getInt(1);
-			return gymID;
-			
-			 
-		} catch (SQLException sqlExcep) {
-			System.out.println(sqlExcep);
-		} catch (Exception excep) {
-			excep.printStackTrace();
-		}
-		
-		return 0;
+//
+//		try {
+//			conn = DatabaseConnector.getConnection();
+//			stmt = conn.prepareStatement(SQLConstants.SQL_INSERTING_GYM);
+//			stmt.setString(1, );
+//			stmt.setString(2, gymAddress);
+//			stmt.setInt(3, gymOwnerId);
+//			stmt.executeUpdate();
+//			stmt = conn.prepareStatement(SQLConstants.SQL_FETCHING_INSERTING_GYM);
+//			stmt.setInt(1, gymOwnerId);
+//			stmt.setString(2, gymName);
+//			ResultSet resultSet = stmt.executeQuery();
+//			resultSet.next();
+//			gymID = resultSet.getInt(1);
+//			return gymID;
+//
+//
+//		} catch (SQLException sqlExcep) {
+//			System.out.println(sqlExcep);
+//		} catch (Exception excep) {
+//			excep.printStackTrace();
+//		}
+//
+//		return 0;
 		
 	}
 	

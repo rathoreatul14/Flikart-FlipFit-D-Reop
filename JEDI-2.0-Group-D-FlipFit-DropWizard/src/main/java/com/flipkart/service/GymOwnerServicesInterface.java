@@ -5,6 +5,7 @@ package com.flipkart.service;
 
 import java.util.Scanner;
 
+import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 
 /**
@@ -31,5 +32,5 @@ public interface GymOwnerServicesInterface {
 	// This method is used to register a new gym
 	// @params in
 	// @params owner
-	public void registerGym(Scanner in, GymOwner owner);
+
 }

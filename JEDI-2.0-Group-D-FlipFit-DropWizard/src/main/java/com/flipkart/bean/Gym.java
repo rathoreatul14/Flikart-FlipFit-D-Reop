@@ -7,17 +7,19 @@ public class Gym {
 
 	private int gymID;
 	private String gymName;
-	private List<Integer> slotIDs = new ArrayList();
+
 	private String registerStatus;
+	private String address;
 	private int gymOwnerID;
 	
 	
-	public Gym(int gymID, String gymName, String registerStatus, int gymOwnerID) {
+	public Gym(int gymID, String gymName, String address, String registerStatus,int gymOwnerID) {
 		super();
 		this.gymID = gymID;
 		this.gymName = gymName;
 		this.registerStatus = registerStatus;
 		this.gymOwnerID = gymOwnerID;
+		this.address=address;
 	}
 	
 	
@@ -33,6 +35,14 @@ public class Gym {
 
 	public String getGymName() {
 		return gymName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public void setGymName(String gymName) {
@@ -55,14 +65,6 @@ public class Gym {
 
 	public void setGymID(int gymID) {
 		this.gymID = gymID;
-	}
-
-	public List<Integer> getSlotIDs() {
-		return slotIDs;
-	}
-
-	public void setSlotIDs(List<Integer> slotIDs) {
-		this.slotIDs = slotIDs;
 	}
 
 	public String getRegisterStatus() {

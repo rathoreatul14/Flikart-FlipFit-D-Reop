@@ -142,7 +142,7 @@ public class CustomerDao implements CustomerDaoInterface{
 			ArrayList<Gym> gyms = new ArrayList<>();
 
 			while (output.next()) {
-				Gym gym = new Gym(output.getInt(1), output.getString(2), output.getString(5), output.getInt(6), output.getString(3));
+				Gym gym = new Gym(output.getInt(1), output.getString(2), output.getString(3), output.getString(5), output.getInt(6));
 				gyms.add(gym);
 			}
 			return gyms;

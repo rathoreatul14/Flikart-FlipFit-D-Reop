@@ -1,5 +1,6 @@
 package com.flipkart.controller;
 
+import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.service.GymOwnerServices;
 import com.flipkart.service.GymOwnerServicesInterface;
@@ -27,6 +28,15 @@ public class GymOwnerController {
         public Response viewGymOwner(@PathParam("gymOwnerId") int gymOwnerId)
         {
          return Response.ok(gymOwnerService.viewProfile(gymOwnerId)).build();
+        }
+        @POST
+        @Consumes (MediaType.APPLICATION_JSON)
+        @Produces (MediaType.APPLICATION_JSON)
+        @Path("/registergym")
+        public Response registerGym(Gym gym)
+        {
+
+                return Response.ok(gymOwnerService.registerGym(gym)).build();
         }
 
 
