@@ -104,5 +104,11 @@ public class GymOwner {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public GymOwner(int id, String name, String status) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.status = status;
+	}
 
 }
