@@ -7,140 +7,74 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.flipkart.bean.Gym;
+import com.flipkart.bean.GymOwner;
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DatabaseConnector;
 import com.flipkart.utils.OutputFormatter;
 
 public class AdminDao implements AdminDaoInterface{
-	
-	@Override
-	public void fetchProfile(String userName) {
-			Connection conn = null;
-		   PreparedStatement stmt = null;
-		   
-		   try {
-			   conn = DatabaseConnector.getConnection();
-			   
-			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ADMIN_QUERY);
-			   stmt.setString(1, userName);
-			   
-			   ResultSet output = stmt.executeQuery();
 
-			   if (output.next()) {
-			       System.out.println("\n\tUsername\tEmail");
-			       do {
-			           System.out.println("\t" + output.getString(2) + " \t " + output.getString(4));
-			       } while (output.next());
-			   } else {
-			       System.out.println("No admin registered yet");
-			   }
-
-		   } catch(Exception e) {
-			   System.out.println(e);
-		   }
-	}
-	
 	@Override
-	public void updatePassword(String userName,String Password) {
-		Connection conn = null;
-	   PreparedStatement stmt = null;
-	   
-	   try {
-		   conn = DatabaseConnector.getConnection();
-		   
-		   stmt = conn.prepareStatement(SQLConstants.SQL_UPDATE_ADMIN_PASSWORD_QUERY);
-		   stmt.setString(1, Password);
-		   stmt.setString(2, userName);
-		   
-		   stmt.executeUpdate();
-
-	   } catch(Exception e) {
-		   System.out.println(e);
-	   }
-	}
-	
-	@Override
-	public void viewAllGyms() {
+	public ArrayList<Gym> viewAllGyms() {
 		   Connection conn = null;
 		   PreparedStatement stmt = null;
-		   
-		   try {
-			   conn = DatabaseConnector.getConnection();
-			   
-			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_GYM_QUERY_ADMIN);
-			   ResultSet output = stmt.executeQuery();
-			   List<String> headers = new ArrayList<>();
-			   headers.add("Id");
-			   headers.add("Name");
-			   headers.add("Status");
 
-			   if (output.next()) {
-				   List<List> data = new ArrayList<>();
-				   //data.add(List.of(output.getInt(1), output.getString(2), output.getString(5)));
+		ArrayList<Gym> gymList = new ArrayList<>();
+		try {
+			conn = DatabaseConnector.getConnection();
+			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_GYM_QUERY_ADMIN);
+			ResultSet output = stmt.executeQuery();
+			while (output.next()){
+				Gym gym =new Gym(output.getInt(1),output.getString(2),output.getString(5),output.getInt(6));
+				gymList.add(gym);
+				System.out.println(output.getInt(1));
+			}
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+		return gymList;
+	}
 
-			       do {
-					   data.add(List.of(output.getInt(1), output.getString(2), output.getString(5)));
-			           //System.out.println("\t" + output.getInt(1) + " \t " + output.getString(2)+ " \t\t" + output.getInt(5));
-			       } while (output.next());
-				   OutputFormatter.outputData(headers, data);
-			   } else {
-			       System.out.println("No gyms available");
-			   }
-		   } catch(Exception e) {
-			   System.out.println(e);
-		   } 
-	   }
-	
+
 	@Override
-	  public void viewAllGymOwners() {
-		   
+	  public ArrayList<GymOwner> viewAllGymOwners() {
+
 		   Connection conn = null;
 		   PreparedStatement stmt = null;
-		   
-		   try {
-			   conn = DatabaseConnector.getConnection();
-			   
-			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_OWNER_QUERY);
-			   ResultSet output = stmt.executeQuery();
-			   
-			    List<String> headers = new ArrayList<>();
-		        headers.add("Owner Id");
-		        headers.add("Name");
-		        headers.add("Status");
-
-			   if (output.next()) {
-			       List<List> data = new ArrayList<>();
-			       data.add(List.of(output.getInt(1), output.getString(2), output.getString(3)));
-			       while (output.next()){
-			    	   data.add(List.of(output.getInt(1), output.getString(2), output.getString(3)));
-			       }
-			       OutputFormatter.outputData(headers, data);
-			   } else {
-			       System.out.println("No gym owner registered yet");
-			   }
-		   } catch(Exception e) {
-			   System.out.println(e.getMessage());
-		   } 
+			ArrayList<GymOwner> gymList = new ArrayList<>();
+			try {
+				conn = DatabaseConnector.getConnection();
+				stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_OWNER_QUERY);
+				ResultSet output = stmt.executeQuery();
+				while (output.next()){
+					GymOwner gymOwner =new GymOwner(output.getInt(1),output.getString(2),output.getString(3));
+					gymList.add(gymOwner);
+				}
+			} catch(Exception e) {
+				System.out.println(e);
+			}
+			return gymList;
 	   }
-	   
+
 	@Override
 	  public void approveGymOwner(int id) {
 			// TODO Auto-generated method stub
 		   Connection conn = null;
 		   PreparedStatement stmt = null;
-		   
+
 		   try {
 			   conn = DatabaseConnector.getConnection();
-			   
+
 			   stmt = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_OWNER_QUERY);
 			   stmt.setString(1, "Approved");
 			   stmt.setInt(2, id);
 			   stmt.executeUpdate();
 			   System.out.println("GymOwner Approved Successfully!!");
-			   
+
 
 		   } catch(Exception e) {
-			   
+
 			   System.out.println(e);
 		   };
 		}
@@ -151,12 +85,12 @@ public class AdminDao implements AdminDaoInterface{
 			// TODO Auto-generated method stub
 			   Connection conn = null;
 			   PreparedStatement stmt = null;
-			   
+
 			   try {
 				   conn = DatabaseConnector.getConnection();
 				   stmt = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_QUERY);
 				   stmt.setInt(1, 1);
-				   stmt.setInt(2, id);	   
+				   stmt.setInt(2, id);
 				   stmt.executeUpdate();
 				   System.out.println("Gym approved successfully!!");
 
@@ -164,71 +98,47 @@ public class AdminDao implements AdminDaoInterface{
 				   System.out.println(e);
 			   }
 		}
-	   
+
 	@Override
-		public void viewPendingGymOwner() {
+		public ArrayList<GymOwner> viewPendingGymOwner() {
 			// TODO Auto-generated method stub
 			Connection conn = null;
-			   PreparedStatement stmt = null;
-			   
-			   try {
-				   conn = DatabaseConnector.getConnection();
-				   
-				   stmt = conn.prepareStatement(SQLConstants.SQL_PENDING_GYM_OWNER_QUERY);
-				   stmt.setString(1, "NotApproved");
-				   ResultSet output = stmt.executeQuery();
-				   List<String> headers = new ArrayList<>();
-				   headers.add("Id");
-				   headers.add("Name");
-
-				   List<List> data = new ArrayList<>();
-				   if (output.next()) {
-					   //System.out.println("\n\tID\tGym Owner Name");
-				       do {
-						   data.add(List.of(output.getInt(1), output.getString(2)));
-				           //System.out.println("\t" + output.getInt(1) + " \t " + output.getString(2));
-				       } while (output.next());
-					   OutputFormatter.outputData(headers, data);
-				   } else {
-				       System.out.println("No pending gym owners available.");
-				   }
-			   } catch(Exception e) {
-				   System.out.println(e.getMessage());
-			   } 
+			PreparedStatement stmt = null;
+			ArrayList<GymOwner> gymList = new ArrayList<>();
+			try {
+				conn = DatabaseConnector.getConnection();
+				stmt = conn.prepareStatement(SQLConstants.SQL_PENDING_GYM_OWNER_QUERY);
+				ResultSet output = stmt.executeQuery();
+				while (output.next()){
+					GymOwner gymOwner =new GymOwner(output.getInt(1),output.getString(2),output.getString(3));
+					gymList.add(gymOwner);
+				}
+			} catch(Exception e) {
+				System.out.println(e);
+			}
+			return gymList;
 		}
 
 
 	@Override
-		public void viewPendingGym() {
+		public ArrayList<Gym> viewPendingGym() {
 			// TODO Auto-generated method stub
-			   Connection conn = null;
-			   PreparedStatement stmt = null;
-			   
-			   try {
-				   conn = DatabaseConnector.getConnection();
-				   
-				   stmt = conn.prepareStatement(SQLConstants.SQL_PENDING_GYM_QUERY);
-				   stmt.setInt(1, 0);
-				   ResultSet output = stmt.executeQuery();
-				   List<String> headers = new ArrayList<>();
-				   headers.add("Id");
-				   headers.add("Name");
-
-				   List<List> data = new ArrayList<>();
-
-				   if (output.next()) {
-					   //System.out.println("\n\tID\tGym Name");
-				       do {
-						   data.add(List.of(output.getInt(1), output.getString(2)));
-						   //System.out.println("\t" + output.getInt(1) + " \t " + output.getString(2));
-				       } while (output.next());
-					   OutputFormatter.outputData(headers, data);
-				   } else {
-				       System.out.println("No pending gyms available.");
-				   }
-			   } catch(Exception e) {
-				   System.out.println(e.getMessage());
-			   } 
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			ArrayList<Gym> gymList = new ArrayList<>();
+			try {
+				conn = DatabaseConnector.getConnection();
+				stmt = conn.prepareStatement(SQLConstants.SQL_PENDING_GYM_QUERY);
+				ResultSet output = stmt.executeQuery();
+				while (output.next()){
+					Gym gym =new Gym(output.getInt(1),output.getString(2),output.getString(5),output.getInt(6));
+					gymList.add(gym);
+					System.out.println(output.getInt(1));
+				}
+			} catch(Exception e) {
+				System.out.println(e);
+			}
+			return gymList;
 		}
 	
 	@Override
