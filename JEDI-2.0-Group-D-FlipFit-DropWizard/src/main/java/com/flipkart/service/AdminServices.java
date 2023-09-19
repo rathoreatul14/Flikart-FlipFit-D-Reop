@@ -2,8 +2,8 @@ package com.flipkart.service;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import com.flipkart.bean.Gym;
+import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
 import com.flipkart.dao.AdminDao;
 import com.flipkart.dao.UserDao;
@@ -18,50 +18,30 @@ public class AdminServices implements AdminServicesInterface {
 	Scanner sc = new Scanner(System.in);
 	UserDao userdao = new UserDao();
 
-	// Prints details of an admin
-	@Override
-	public void viewProfile() {
-		// TODO Auto-generated method stub
-		System.out.println("Enter username: ");
-		String username = sc.next();
-		dao.fetchProfile(username);
-	}
-
-	// Updates password of admin
-	@Override
-	public void updatePassword() {
-		// TODO Auto-generated method stub
-		System.out.println("Enter user id: ");
-		String userName = sc.next();
-		System.out.println("Enter password: ");
-		String password = sc.next();
-
-		User user = userdao.authenticateUser(userName, password);
-		if (user == null) {
-			System.out.println("Invalid Credentials.");
-		} else {
-			System.out.println("Enter new Password.");
-			String newPassword = sc.next();
-			dao.updatePassword(userName, newPassword);
-		}
-	}
-
 	// Prints details of all gyms
 	@Override
 	public ArrayList<Gym> viewAllGyms() {
-
-		dao.viewAllGyms();
-
-        return null;
-    }
+		return dao.viewAllGyms();
+	}
 
 	// Prints details of all gym owners
 	@Override
-	public void viewAllGymOwners() {
-
-		dao.viewAllGymOwners();
-
+	public ArrayList<GymOwner> viewAllGymOwners() {
+		return dao.viewAllGymOwners();
 	}
+
+	// Prints the list of unapproved gym owners
+	@Override
+	public ArrayList<GymOwner> viewPendingGymOwner() {
+		return dao.viewPendingGymOwner();
+	}
+
+	// Prints the list of unapproved gyms
+	@Override
+	public ArrayList<Gym> viewPendingGym() {
+		return dao.viewPendingGym();
+	}
+
 
 	// Approve gym owner registration request
 	@Override
@@ -119,18 +99,6 @@ public class AdminServices implements AdminServicesInterface {
 
 	}
 
-	// Prints the list of unapproved gym owners
-	@Override
-	public void viewPendingGymOwner() {
 
-		dao.viewPendingGymOwner();
-	}
-
-	// Prints the list of unapproved gyms
-	@Override
-	public void viewPendingGym() {
-
-		dao.viewPendingGym();
-	}
 
 }
