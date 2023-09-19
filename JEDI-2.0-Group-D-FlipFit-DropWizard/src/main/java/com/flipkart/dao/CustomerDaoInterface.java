@@ -1,7 +1,10 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.Customer;
+import com.flipkart.bean.Gym;
 import com.flipkart.bean.User;
+
+import java.util.ArrayList;
 
 public interface CustomerDaoInterface {
 	/**
@@ -9,7 +12,7 @@ public interface CustomerDaoInterface {
  	*@param user
   	*@param customer
 	*/
-	public void registerCustomer(User user, Customer customer);
+	public int registerCustomer(User user, Customer customer);
 	/**
 	*This is Used to get custonmer from a given userID
  	*@param userId
@@ -18,13 +21,14 @@ public interface CustomerDaoInterface {
 	public Customer getCustomerFromUserID(int userId);
 	/**
 	*This is Used to view profile of a particular Customer
+	*This is Used to view profile of a particular Customer
  	*@param Customer
 	*/
-	public void viewProfile(Customer customer);
+	public Customer viewProfile(int id);
 	/**
 	*This is Used to fetch the list of approved and available gyms
 	*/
-	public void fetchGymList();
+	public ArrayList<Gym> fetchGymList();
 	/**
 	*This is Used to fetch the slot list of a particular gym
  	*@param gymId

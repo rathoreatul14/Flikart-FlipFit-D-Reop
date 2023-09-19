@@ -1,6 +1,7 @@
 package com.flipkart.service;
 
 import com.flipkart.bean.Customer;
+import com.flipkart.bean.Gym;
 import com.flipkart.dao.CustomerDao;
 import com.flipkart.exception.BookingExistsException;
 import com.flipkart.exception.SlotFilledException;
@@ -16,33 +17,19 @@ public class CustomerServices implements CustomerServicesInterface {
 
 	// Registers a new customer
 	@Override
-	public void registerCustomer(Scanner sc) {
+	public String registerCustomer(Customer customer) {
 
-		System.out.println("Enter Name");
-		String name = sc.next();
-		System.out.println("Enter Email");
-		String email = sc.next();
-
-		
-		
-		System.out.println("Enter Address");
-		String address = sc.next();
-		System.out.println("Enter Mobile");
-		String mobile = sc.next();
-		System.out.println("Enter Password");
-		String password = sc.next();
-
-		User user = new User(1, name, email, "customer", password);
-		Customer customer = new Customer(1, name, address, user.getUserID(), mobile, email);
-
-		dao.registerCustomer(user, customer);
-		System.out.println("Customer registerd successfully");
+			User user = new User(1, customer.getName(), customer.getEmail(), "customer", customer.getPassword());
+			int status = dao.registerCustomer(user, customer);
+			if(status == 1){
+			return "Customer registerd successfully";}
+			return "Customer couldn't be registered due to some issue";
 	}
 
 	// View details of particular customer
 	@Override
-	public void viewProfile(Customer customer) {
-		dao.viewProfile(customer);
+	public Customer viewProfile(int id) {
+		return dao.viewProfile(id);
 	}
 
 	// Update details of a particular customer
@@ -58,7 +45,6 @@ public class CustomerServices implements CustomerServicesInterface {
 		String newAddress = sc.next();
 		customer.setAddress(newAddress);
 		customer.setName(newName);
-
 	}
 
 	// View bookings of an user
@@ -69,8 +55,8 @@ public class CustomerServices implements CustomerServicesInterface {
 
 	// Prints list of all gyms
 	@Override
-	public void viewGyms() {
-		dao.fetchGymList();
+	public ArrayList<Gym> viewGyms() {
+		return dao.fetchGymList();
 	}
 
 	// To book a slot
