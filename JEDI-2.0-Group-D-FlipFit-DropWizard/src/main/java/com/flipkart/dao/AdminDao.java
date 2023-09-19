@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.flipkart.constants.SQLConstants;
-import com.flipkart.utils.DBUtils;
+import com.flipkart.utils.DatabaseConnector;
 import com.flipkart.utils.OutputFormatter;
 
 public class AdminDao implements AdminDaoInterface{
@@ -19,7 +19,7 @@ public class AdminDao implements AdminDaoInterface{
 		   PreparedStatement stmt = null;
 		   
 		   try {
-			   conn = DBUtils.getConnection();
+			   conn = DatabaseConnector.getConnection();
 			   
 			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ADMIN_QUERY);
 			   stmt.setString(1, userName);
@@ -46,7 +46,7 @@ public class AdminDao implements AdminDaoInterface{
 	   PreparedStatement stmt = null;
 	   
 	   try {
-		   conn = DBUtils.getConnection();
+		   conn = DatabaseConnector.getConnection();
 		   
 		   stmt = conn.prepareStatement(SQLConstants.SQL_UPDATE_ADMIN_PASSWORD_QUERY);
 		   stmt.setString(1, Password);
@@ -65,7 +65,7 @@ public class AdminDao implements AdminDaoInterface{
 		   PreparedStatement stmt = null;
 		   
 		   try {
-			   conn = DBUtils.getConnection();
+			   conn = DatabaseConnector.getConnection();
 			   
 			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_GYM_QUERY_ADMIN);
 			   ResultSet output = stmt.executeQuery();
@@ -98,7 +98,7 @@ public class AdminDao implements AdminDaoInterface{
 		   PreparedStatement stmt = null;
 		   
 		   try {
-			   conn = DBUtils.getConnection();
+			   conn = DatabaseConnector.getConnection();
 			   
 			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_OWNER_QUERY);
 			   ResultSet output = stmt.executeQuery();
@@ -130,7 +130,7 @@ public class AdminDao implements AdminDaoInterface{
 		   PreparedStatement stmt = null;
 		   
 		   try {
-			   conn = DBUtils.getConnection();
+			   conn = DatabaseConnector.getConnection();
 			   
 			   stmt = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_OWNER_QUERY);
 			   stmt.setString(1, "Approved");
@@ -153,7 +153,7 @@ public class AdminDao implements AdminDaoInterface{
 			   PreparedStatement stmt = null;
 			   
 			   try {
-				   conn = DBUtils.getConnection();
+				   conn = DatabaseConnector.getConnection();
 				   stmt = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_QUERY);
 				   stmt.setInt(1, 1);
 				   stmt.setInt(2, id);	   
@@ -172,7 +172,7 @@ public class AdminDao implements AdminDaoInterface{
 			   PreparedStatement stmt = null;
 			   
 			   try {
-				   conn = DBUtils.getConnection();
+				   conn = DatabaseConnector.getConnection();
 				   
 				   stmt = conn.prepareStatement(SQLConstants.SQL_PENDING_GYM_OWNER_QUERY);
 				   stmt.setString(1, "NotApproved");
@@ -205,7 +205,7 @@ public class AdminDao implements AdminDaoInterface{
 			   PreparedStatement stmt = null;
 			   
 			   try {
-				   conn = DBUtils.getConnection();
+				   conn = DatabaseConnector.getConnection();
 				   
 				   stmt = conn.prepareStatement(SQLConstants.SQL_PENDING_GYM_QUERY);
 				   stmt.setInt(1, 0);
@@ -242,7 +242,7 @@ public class AdminDao implements AdminDaoInterface{
 		   PreparedStatement stmt = null;
 		   
 		   try {
-			   conn = DBUtils.getConnection();
+			   conn = DatabaseConnector.getConnection();
 			   
 			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCHING_GYM_OWNER);
 			   stmt.setInt(1, id);
@@ -274,7 +274,7 @@ public class AdminDao implements AdminDaoInterface{
 		   PreparedStatement stmt = null;
 		   
 		   try {
-			   conn = DBUtils.getConnection();
+			   conn = DatabaseConnector.getConnection();
 			   
 			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCHING_GYM_OWNER);
 			   stmt.setInt(1, id);
@@ -307,7 +307,7 @@ public class AdminDao implements AdminDaoInterface{
 		   PreparedStatement stmt = null;
 		   
 		   try {
-			   conn = DBUtils.getConnection();
+			   conn = DatabaseConnector.getConnection();
 			   
 			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCHING_GYM);
 			   stmt.setInt(1, id);
@@ -338,7 +338,7 @@ public class AdminDao implements AdminDaoInterface{
 		   PreparedStatement stmt = null;
 		   
 		   try {
-			   conn = DBUtils.getConnection();
+			   conn = DatabaseConnector.getConnection();
 			   
 			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCHING_GYM);
 			   stmt.setInt(1, id);

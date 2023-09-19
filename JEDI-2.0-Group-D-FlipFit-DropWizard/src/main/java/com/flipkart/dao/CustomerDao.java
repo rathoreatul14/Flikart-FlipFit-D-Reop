@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.flipkart.constants.SQLConstants;
-import com.flipkart.utils.DBUtils;
+import com.flipkart.utils.DatabaseConnector;
 import com.flipkart.utils.OutputFormatter;
 import com.flipkart.bean.*;
 
@@ -33,7 +33,7 @@ public class CustomerDao implements CustomerDaoInterface{
 
 		try {
 			// Getting customer Id
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_SIZE_CUSTOMER_QUERY);
 			ResultSet output = stmt.executeQuery();
 			output.next();
@@ -78,7 +78,7 @@ public class CustomerDao implements CustomerDaoInterface{
 		PreparedStatement stmt = null;
 
 		try {
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_CUSTOMER_USING_USERID_QUERY);
 			stmt.setInt(1, userId);
 
@@ -106,7 +106,7 @@ public class CustomerDao implements CustomerDaoInterface{
 		PreparedStatement stmt = null;
 
 		try {
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_CUSTOMER_QUERY);
 			stmt.setInt(1, customer.getCustomerID());
 
@@ -140,7 +140,7 @@ public class CustomerDao implements CustomerDaoInterface{
 		PreparedStatement stmt = null;
 
 		try {
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_GYM_QUERY);
 
 			ResultSet output = stmt.executeQuery();
@@ -178,7 +178,7 @@ public class CustomerDao implements CustomerDaoInterface{
 		PreparedStatement stmt = null;
 
 		try {
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYM_SLOT_QUERY);
 			stmt.setInt(1, gymId);
 			ResultSet output = stmt.executeQuery();
@@ -226,7 +226,7 @@ public class CustomerDao implements CustomerDaoInterface{
 		PreparedStatement stmt = null;
 
 		try {
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 
 			stmt = conn.prepareStatement(SQLConstants.SQL_DATE_CHECK_FROM_SLOTID);
 			stmt.setInt(1, slotId);
@@ -277,7 +277,7 @@ public class CustomerDao implements CustomerDaoInterface{
 		PreparedStatement stmt = null;
 
 		try {
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_COUNT_CURRENT_CAPACITY_QUERY);
 			stmt.setInt(1, slotId);
 			ResultSet output = stmt.executeQuery();
@@ -309,7 +309,7 @@ public class CustomerDao implements CustomerDaoInterface{
 		PreparedStatement stmt = null;
 
 		try {
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_BOOK_QUERY_FOR_A_CUST);
 			stmt.setInt(1, customerId);
 			stmt.setInt(2, slotId);
@@ -337,7 +337,7 @@ public class CustomerDao implements CustomerDaoInterface{
 		PreparedStatement stmt = null;
 
 		try {
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_SLOTID_FOR_CUSTOMER);
 			stmt.setInt(1, custId);
 			ResultSet output = stmt.executeQuery();
@@ -392,7 +392,7 @@ public class CustomerDao implements CustomerDaoInterface{
 		
 		try {
 			
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 		    stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_BOOK_QUERY_FOR_A_CUST);
 		    stmt.setInt(1, customerId);
 		    stmt.setInt(2, previousSlot);

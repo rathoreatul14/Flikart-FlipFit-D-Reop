@@ -1,7 +1,9 @@
 package com.flipkart.service;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.flipkart.bean.Gym;
 import com.flipkart.bean.User;
 import com.flipkart.dao.AdminDao;
 import com.flipkart.dao.UserDao;
@@ -46,11 +48,12 @@ public class AdminServices implements AdminServicesInterface {
 
 	// Prints details of all gyms
 	@Override
-	public void viewAllGyms() {
+	public ArrayList<Gym> viewAllGyms() {
 
 		dao.viewAllGyms();
 
-	}
+        return null;
+    }
 
 	// Prints details of all gym owners
 	@Override

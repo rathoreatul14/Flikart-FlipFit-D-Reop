@@ -16,7 +16,7 @@ import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
 import com.flipkart.constants.SQLConstants;
-import com.flipkart.utils.DBUtils;
+import com.flipkart.utils.DatabaseConnector;
 import com.flipkart.utils.OutputFormatter;
 
 /**
@@ -37,7 +37,7 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 		PreparedStatement stmt = null;
 
 		try {
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYMOWNER_USING_USERID_QUERY);
 			stmt.setInt(1, userId);
 
@@ -62,7 +62,7 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 
 		try {
 			// Getting customer Id
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 
 //		    user.setUserName(Integer.toString(count));
 
@@ -102,7 +102,7 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 		PreparedStatement stmt = null;
 
 		try {
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYMOWNER_QUERY);
 			stmt.setInt(1, owner.getUserId());
 			ResultSet output = stmt.executeQuery();
@@ -133,7 +133,7 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 		PreparedStatement stmt = null;
 
 		try {
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_UPDATE_GYMOWNER_QUERY);
 			stmt.setString(1, owner.getName());
             stmt.setString(2, owner.getAadharNumber());
@@ -162,7 +162,7 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 		PreparedStatement stmt = null;
 
 		try {
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_OWNER_GYM_DET_QUERY);
 			stmt.setInt(1, owner.getId());
 			ResultSet resultSet = stmt.executeQuery();
@@ -208,7 +208,7 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 		PreparedStatement stmt = null;
 
 		try {
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_INSERTING_GYM);
 			stmt.setString(1, gymName);
 			stmt.setString(2, gymAddress);

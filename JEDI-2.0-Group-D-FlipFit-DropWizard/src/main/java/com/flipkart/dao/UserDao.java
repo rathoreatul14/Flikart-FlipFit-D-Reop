@@ -6,7 +6,7 @@ import java.sql.Connection;
 
 import com.flipkart.bean.User;
 import com.flipkart.constants.SQLConstants;
-import com.flipkart.utils.DBUtils;
+import com.flipkart.utils.DatabaseConnector;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,7 +31,7 @@ public class UserDao {
 	   PreparedStatement stmt = null;
 	   
 	   try {
-		   conn = DBUtils.getConnection();
+		   conn = DatabaseConnector.getConnection();
 		   
 		   stmt = conn.prepareStatement(SQLConstants.SQL_AUTH_QUERY);
 		   stmt.setString(1, userName);

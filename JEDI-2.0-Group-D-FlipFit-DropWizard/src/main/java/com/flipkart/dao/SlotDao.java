@@ -11,7 +11,7 @@ import com.flipkart.bean.Slot;
 import com.flipkart.bean.User;
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.dao.SlotDaoInterface;
-import com.flipkart.utils.DBUtils;
+import com.flipkart.utils.DatabaseConnector;
 import java.time.LocalTime;
 import java.sql.SQLException;
 import java.sql.*;
@@ -31,7 +31,7 @@ public class SlotDao implements SlotDaoInterface {
 
 		try {
 			// Getting customer Id
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 
 //		    user.setUserName(Integer.toString(count));
 
@@ -59,7 +59,7 @@ public class SlotDao implements SlotDaoInterface {
 		PreparedStatement stmt = null;
 
 		try {
-			conn = DBUtils.getConnection();
+			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_DELETE_SLOT_QUERY);
 			stmt.setInt(1, SlotId);
 			int rowsUpdated=stmt.executeUpdate();

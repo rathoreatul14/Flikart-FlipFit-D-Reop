@@ -1,7 +1,8 @@
 package com.flipkart.controller;
 
 import com.flipkart.bean.Gym;
-import com.flipkart.service.AdminService;
+import com.flipkart.service.AdminServices;
+import com.flipkart.service.AdminServicesInterface;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -13,7 +14,7 @@ import java.util.List;
 @Path("/admin")
 public class AdminController {
 
-    private final AdminService adminService = new AdminService();
+    private final AdminServicesInterface adminService = new AdminServices();
     @GET
     @Path("/gyms")
     public ArrayList<Gym> viewAllGyms(){

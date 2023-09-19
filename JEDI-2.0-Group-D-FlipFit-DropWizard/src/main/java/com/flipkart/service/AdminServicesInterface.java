@@ -3,8 +3,11 @@
  */
 package com.flipkart.service;
 
+import com.flipkart.bean.Gym;
 import com.flipkart.exception.AlreadyApprovedGymException;
 import com.flipkart.exception.WrongGymIdException;
+
+import java.util.ArrayList;
 
 /**
  * @author arjit.giri
@@ -42,9 +45,11 @@ public interface AdminServicesInterface {
 
 	/**
 	 * This is to show all the available Gym
+	 *
+	 * @return
 	 */
 
-	public void viewAllGyms();
+	public ArrayList<Gym> viewAllGyms();
 
 	/**
 	 * This is to show all the Gym Owners
