@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import ch.qos.logback.core.CoreConstants;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
@@ -18,6 +19,7 @@ import com.flipkart.bean.User;
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DatabaseConnector;
 import com.flipkart.utils.OutputFormatter;
+import com.sun.org.apache.bcel.internal.generic.ARETURN;
 
 /**
  * @author msaikalyan.yadav
@@ -43,7 +45,7 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 
 			ResultSet output = stmt.executeQuery();
 			if (output.next()) {
-				GymOwner gymOwner = new GymOwner(output.getInt(1), output.getString(2),output.getString(3), output.getString(4), output.getString(5),output.getString(6),userId);
+				GymOwner gymOwner = new GymOwner(output.getInt(1), output.getString(2),output.getString(3), output.getString(4), output.getString(5),output.getString(6),userId,output.getString(8));
 				return gymOwner;
 			}
 
@@ -55,7 +57,7 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 		return null;
 	}
 	@Override
-	public void registerGymOwner(GymOwner owner, User user) {
+	public int registerGymOwner(GymOwner owner, User user) {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -84,17 +86,20 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 			UserDao userDao = new UserDao();
 			User user1 = userDao.authenticateUser(user.getName(), user.getPassword());
 			stmt.setInt(6, user1.getUserID());
+			stmt.setString(7, owner.getPassword());
 
-			stmt.executeUpdate();
+			int status=stmt.executeUpdate();
+			return status;
 		} catch (SQLException sqlExcep) {
 			System.out.println(sqlExcep);
 		} catch (Exception excep) {
 			excep.printStackTrace();
 		}
+		return 0;
 	}
 	
-	public void viewProfile(GymOwner owner) {
-		// Connect to the database and fetch the list of all gyms
+	public GymOwner viewProfile(int ownerId) {
+//		// Connect to the database and fetch the list of all gyms
 		// Print Customer profile
 		// Handle any exceptions that occur
 
@@ -104,24 +109,20 @@ public class GymOwnerDao implements GymOwnerDaoInterface {
 		try {
 			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYMOWNER_QUERY);
-			stmt.setInt(1, owner.getUserId());
+			stmt.setInt(1, ownerId);
 			ResultSet output = stmt.executeQuery();
-			List<String> headers = new ArrayList<>();
-	        headers.add("Name");
-	        headers.add("Status");
-	        headers.add("AadharNumber");
-	        headers.add("Contact");
-	        headers.add("Address");
-	        List<List> data = new ArrayList<>();
-			while (output.next()) {
-				data.add(List.of(output.getString(2), output.getString(3), output.getString(4), output.getString(5), output.getString(6)));
+			if(output.next()) {
+				System.out.println();
+				GymOwner gymOwner = new GymOwner(output.getInt(1), output.getString(2), output.getString(3), output.getString(4), output.getString(5), output.getString(6), output.getInt(7), output.getString(8));
+				return gymOwner;
 			}
-			OutputFormatter.outputData(headers, data);
+//			OutputFormatter.outputData(headers, data);
 		} catch (SQLException sqlExcep) {
 			System.out.println(sqlExcep);
 		} catch (Exception excep) {
 			excep.printStackTrace();
 		}
+		return new GymOwner();
 	}
 	
 	public void updateProfile(GymOwner owner) {

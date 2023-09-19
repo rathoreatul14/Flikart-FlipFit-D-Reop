@@ -47,10 +47,10 @@ public class SQLConstants {
 	public static final String SQL_INSERT_Slot_QUERY = "Insert Into Slot Values (?,?,?,?,?)";
 	public static final String SQL_SIZE_GYMOWNER_QUERY = "Select Count(*) From GymOwner";
 	public static final String SQL_SIZE_GYMOWNER_REG_QUERY = "Select Count(*) From GymOwnerRegistration";
-	public static final String SQL_REGISTER_GYMOWNER_QUERY = "Insert Into GymOwner (name,status,aadhar,contactNumber,address,userId) Values (?,?,?,?,?,?)";
+	public static final String SQL_REGISTER_GYMOWNER_QUERY = "Insert Into GymOwner (name,status,aadhar,contactNumber,address,userId,password) Values (?,?,?,?,?,?,?)";
 	public static final String SQL_REGISTER_GYMOWNER_REG_QUERY = "Insert Into GymOwnerRegistration Values (?,NULL,NULL,?)";
 	public static final String SQL_REGISTER_GYMOWNER_USER_QUERY = "Insert Into User (UserName,Password,Email,Role) Values (?,?,?,?)";
-	public static final String SQL_FETCH_GYMOWNER_QUERY = "Select * From GymOwner Where userId = (?)";
+	public static final String SQL_FETCH_GYMOWNER_QUERY = "Select * From GymOwner Where ownerId = (?)";
 	public static final String SQL_UPDATE_GYMOWNER_QUERY = "Update GymOwner Set name= (?), aadhar=(?),contactNumber= (?), address= (?) Where userId = (?)";
 	
 	

@@ -27,13 +27,13 @@ public interface GymOwnerDaoInterface {
    	*@param owner
  	*/
 
-	public void registerGymOwner(GymOwner owner, User user);
+	public int registerGymOwner(GymOwner owner, User user);
 	/**
  	* This method is used to view Gymowner profile
-   	*@param owner
+   	*@param ownerId
  	*/
 	
-	public void viewProfile(GymOwner owner);
+	public GymOwner viewProfile(int ownerId);
 	/**
  	* This method is used to update Gymowner profile
    	*@param owner
