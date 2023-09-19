@@ -169,7 +169,7 @@ public class CustomerDao implements CustomerDaoInterface{
 	 *
 	 * @param gymId The ID of the gym.
 	 */
-	public void fetchSlotList(int gymId) {
+	public int fetchSlotList(int gymId) {
 		// Connect to the database and fetch the list of slots for the specified gym
 		// Print the fetched slot details
 		// Handle any exceptions that occur
@@ -182,17 +182,32 @@ public class CustomerDao implements CustomerDaoInterface{
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYM_SLOT_QUERY);
 			stmt.setInt(1, gymId);
 			ResultSet output = stmt.executeQuery();
-//		    System.out.println(output);
-			System.out.println("\tSlotId\tDay\ttime");
+			List<String> headers = new ArrayList<>();
+			headers.add("SlotID");
+			headers.add("Day");
+			headers.add("Time");
+
+			List<List> data = new ArrayList<>();
+			//System.out.println("\tSlotId\tDay\ttime");
 			while (output.next()) {
-				System.out.println("\t " + output.getString(1) + "\t " + output.getString(3) + "    "
-						+ output.getString(4) + ":00hrs");
+//				System.out.println("\t " + output.getString(1) + "\t " + output.getString(3) + "    "
+//						+ output.getString(4) + ":00hrs");
+				data.add(List.of(output.getString(1), output.getString(3), output.getString(4)));
 			}
-		} catch (SQLException sqlExcep) {
-//		       System.out.println(sqlExcep);
+			if(!data.isEmpty()){
+				OutputFormatter.outputData(headers, data);
+				return 1;
+			}else{
+				System.out.println("No Slots Available");
+			}
+			return 0;
+
+		} catch (SQLException Ex) {
+		       System.out.println(Ex.getMessage());
 		} catch (Exception excep) {
 			excep.printStackTrace();
 		}
+		return 0;
 	}
 
 	/**
@@ -225,10 +240,7 @@ public class CustomerDao implements CustomerDaoInterface{
 			stmt.setTime(2, times);
 			ResultSet out = stmt.executeQuery();
 			if(out.next()) {
-				
-				System.out.println("getting");
 				int previousSlotId = out.getInt(5);
-				
 				changeGymSlot( slotId, customerId, previousSlotId);
 			}
 			else {
@@ -329,7 +341,14 @@ public class CustomerDao implements CustomerDaoInterface{
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_SLOTID_FOR_CUSTOMER);
 			stmt.setInt(1, custId);
 			ResultSet output = stmt.executeQuery();
-			System.out.println("\tSlotID\tGymID\tDay\ttime");
+			//System.out.println("\tSlotID\tGymID\tDay\ttime");
+			List<String> headers = new ArrayList<>();
+			headers.add("SlotID");
+			headers.add("GymID");
+			headers.add("Day");
+			headers.add("Time");
+
+			List<List> data = new ArrayList<>();
 
 			while (output.next()) {
 				int slotId = output.getInt(5);
@@ -337,9 +356,11 @@ public class CustomerDao implements CustomerDaoInterface{
 				stmt.setInt(1, slotId);
 				ResultSet out = stmt.executeQuery();
 				while (out.next()) {
-					System.out.println("\t " + out.getInt(1) + " \t " + out.getString(5) + "\t "
-							+ out.getString(3) + "    " + out.getString(4) + ":00hrs");
+//					System.out.println("\t " + out.getInt(1) + " \t " + out.getString(5) + "\t "
+//							+ out.getString(3) + "    " + out.getString(4) + ":00hrs");
+					data.add(List.of(out.getInt(1), out.getString(5), out.getString(3), out.getString(4)));
 				}
+				OutputFormatter.outputData(headers, data);
 			}
 
 		} catch (SQLException sqlExcep) {

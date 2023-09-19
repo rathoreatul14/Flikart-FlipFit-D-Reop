@@ -29,7 +29,7 @@ public interface CustomerDaoInterface {
 	*This is Used to fetch the slot list of a particular gym
  	*@param gymId
 	*/
-	public void fetchSlotList(int gymId) ;
+	public int fetchSlotList(int gymId) ;
 	/**
  	*@param slotId
 	*This is Used to book slots for a particular slotId for a particular user

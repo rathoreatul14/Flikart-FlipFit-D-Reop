@@ -69,12 +69,20 @@ public class AdminDao implements AdminDaoInterface{
 			   
 			   stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_GYM_QUERY_ADMIN);
 			   ResultSet output = stmt.executeQuery();
+			   List<String> headers = new ArrayList<>();
+			   headers.add("Id");
+			   headers.add("Name");
+			   headers.add("Status");
 
 			   if (output.next()) {
-				   System.out.println("\n\tID\tGym Name\tStatus");
+				   List<List> data = new ArrayList<>();
+				   //data.add(List.of(output.getInt(1), output.getString(2), output.getString(5)));
+
 			       do {
-			           System.out.println("\t" + output.getInt(1) + " \t " + output.getString(2)+ " \t\t" + output.getInt(5));
+					   data.add(List.of(output.getInt(1), output.getString(2), output.getString(5)));
+			           //System.out.println("\t" + output.getInt(1) + " \t " + output.getString(2)+ " \t\t" + output.getInt(5));
 			       } while (output.next());
+				   OutputFormatter.outputData(headers, data);
 			   } else {
 			       System.out.println("No gyms available");
 			   }
@@ -111,7 +119,7 @@ public class AdminDao implements AdminDaoInterface{
 			       System.out.println("No gym owner registered yet");
 			   }
 		   } catch(Exception e) {
-			   System.out.println(e);
+			   System.out.println(e.getMessage());
 		   } 
 	   }
 	   
@@ -169,17 +177,23 @@ public class AdminDao implements AdminDaoInterface{
 				   stmt = conn.prepareStatement(SQLConstants.SQL_PENDING_GYM_OWNER_QUERY);
 				   stmt.setString(1, "Unapproved");
 				   ResultSet output = stmt.executeQuery();
+				   List<String> headers = new ArrayList<>();
+				   headers.add("Id");
+				   headers.add("Name");
 
+				   List<List> data = new ArrayList<>();
 				   if (output.next()) {
-					   System.out.println("\n\tID\tGym Owner Name");
+					   //System.out.println("\n\tID\tGym Owner Name");
 				       do {
-				           System.out.println("\t" + output.getInt(1) + " \t " + output.getString(2));
+						   data.add(List.of(output.getInt(1), output.getString(2)));
+				           //System.out.println("\t" + output.getInt(1) + " \t " + output.getString(2));
 				       } while (output.next());
+					   OutputFormatter.outputData(headers, data);
 				   } else {
 				       System.out.println("No pending gym owners available.");
 				   }
 			   } catch(Exception e) {
-				   System.out.println(e);
+				   System.out.println(e.getMessage());
 			   } 
 		}
 
@@ -196,17 +210,24 @@ public class AdminDao implements AdminDaoInterface{
 				   stmt = conn.prepareStatement(SQLConstants.SQL_PENDING_GYM_QUERY);
 				   stmt.setInt(1, 0);
 				   ResultSet output = stmt.executeQuery();
+				   List<String> headers = new ArrayList<>();
+				   headers.add("Id");
+				   headers.add("Name");
+
+				   List<List> data = new ArrayList<>();
 
 				   if (output.next()) {
-					   System.out.println("\n\tID\tGym Name");
+					   //System.out.println("\n\tID\tGym Name");
 				       do {
-				           System.out.println("\t" + output.getInt(1) + " \t " + output.getString(2));
+						   data.add(List.of(output.getInt(1), output.getString(2)));
+						   //System.out.println("\t" + output.getInt(1) + " \t " + output.getString(2));
 				       } while (output.next());
+					   OutputFormatter.outputData(headers, data);
 				   } else {
 				       System.out.println("No pending gyms available.");
 				   }
 			   } catch(Exception e) {
-				   System.out.println(e);
+				   System.out.println(e.getMessage());
 			   } 
 		}
 	

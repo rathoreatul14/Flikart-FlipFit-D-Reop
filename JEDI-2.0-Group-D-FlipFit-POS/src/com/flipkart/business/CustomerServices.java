@@ -90,7 +90,9 @@ public class CustomerServices implements CustomerServicesInterface {
 			System.out.println("Enter the gymId to view slots.");
 			Scanner sc = new Scanner(System.in);
 			int gymId = sc.nextInt();
-			fetchSlots(gymId);
+			if(fetchSlots(gymId)==0){
+				return;
+			}
 			System.out.println("Enter the slotId to book slot.");
 			int slotId = sc.nextInt();
 			
@@ -108,7 +110,7 @@ public class CustomerServices implements CustomerServicesInterface {
 	}
 
 	// Fetch list of slots in a gym
-	public void fetchSlots(int gymId) {
-		dao.fetchSlotList(gymId);
+	public int fetchSlots(int gymId) {
+		return dao.fetchSlotList(gymId);
 	}
 }
