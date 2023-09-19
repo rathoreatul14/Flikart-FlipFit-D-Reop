@@ -175,7 +175,7 @@ public class AdminDao implements AdminDaoInterface{
 				   conn = DBUtils.getConnection();
 				   
 				   stmt = conn.prepareStatement(SQLConstants.SQL_PENDING_GYM_OWNER_QUERY);
-				   stmt.setString(1, "Unapproved");
+				   stmt.setString(1, "NotApproved");
 				   ResultSet output = stmt.executeQuery();
 				   List<String> headers = new ArrayList<>();
 				   headers.add("Id");

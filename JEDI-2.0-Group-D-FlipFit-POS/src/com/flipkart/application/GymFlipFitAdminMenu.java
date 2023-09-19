@@ -48,10 +48,11 @@ public class GymFlipFitAdminMenu {
 					break;
 				case 7:
 					System.out.println("Exit!!");
-					break;
+					return;
 				// Default case statement
 				default:
 					System.out.println("Incorrect choice!!! Please try again!!!");
+					return;
 			}
 		}
 	}
