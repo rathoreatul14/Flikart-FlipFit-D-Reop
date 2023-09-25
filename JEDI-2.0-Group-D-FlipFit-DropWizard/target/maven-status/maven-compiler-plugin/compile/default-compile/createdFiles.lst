@@ -28,6 +28,7 @@ com/flipkart/utils/DatabaseConnector.class
 com/flipkart/dao/SlotDao.class
 com/flipkart/app/App.class
 com/flipkart/bean/Slot.class
+com/flipkart/controller/CustomerController.class
 com/flipkart/dao/GymOwnerDaoInterface.class
 com/flipkart/dao/AdminDao.class
 com/flipkart/service/AdminServicesInterface.class

@@ -94,7 +94,7 @@ public class SQLConstants {
 
 
 
-
+	public static final String SQL_FETCH_BOOKING_FOR_CUSTOMER = "Select * from Booking where CustomerId = (?)";
 
 	
 	

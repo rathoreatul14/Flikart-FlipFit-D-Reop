@@ -1,5 +1,7 @@
 package com.flipkart.controller;
 
+
+import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.service.CustomerServices;
@@ -7,9 +9,13 @@ import com.flipkart.service.CustomerServicesInterface;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
 import org.checkerframework.checker.optional.qual.Present;
 
+
+
 import java.util.ArrayList;
+import java.util.List;
 
 @Path("/customer")
 @Produces(MediaType.APPLICATION_JSON)
@@ -47,15 +53,27 @@ public class CustomerController
         ArrayList<Gym> gyms = customerService.viewGyms();
         return Response.ok(gyms).build();
     }
-    @GET
-    @Path("/book")
-    public String bookSlot(){
-        return "Book Slot";
+    @POST
+    @Path("/book/{slotId}/{custId}/{GymId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void bookSlot(@PathParam("slotId") int slotId, @PathParam("custId") int custId, @PathParam("GymId") int GymId){
+        customerService.bookSlot(slotId, custId, GymId);
     }
 
+
+
+
+
     @GET
-    @Path("/bookings")
-    public String viewBookings(){
-        return "view bookings";
+    @Path("/getAllBookings/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllBookings(@PathParam("id") int id){
+
+        List<Booking> myBookings = customerService.viewBookings(id);
+        if(!myBookings.isEmpty())
+            return Response.ok(myBookings).build();
+        else return Response.status(Response.Status.NOT_FOUND).build();
+
     }
+
 }

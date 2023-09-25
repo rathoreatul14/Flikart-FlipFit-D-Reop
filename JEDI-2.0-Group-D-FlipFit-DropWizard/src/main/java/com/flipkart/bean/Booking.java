@@ -1,20 +1,50 @@
 package com.flipkart.bean;
 
+import java.sql.Time;
+
 public class Booking {
 	
 	private int bookingID;
 	private int userID;
 	private int slotID;
-	private String status;
-	
-	
-	public Booking(int bookingID, int userID, int slotID, String status) {
-		super();
+
+	private String slotDate;
+
+	private Time slotTime;
+
+	public Booking (){
+
+	}
+
+
+	public Booking(int bookingID, int userID, int slotID, String slotDate, Time slotTime) {
 		this.bookingID = bookingID;
 		this.userID = userID;
 		this.slotID = slotID;
-		this.status = status;
+		this.slotDate = slotDate;
+		this.slotTime = slotTime;
 	}
+
+
+	public String getSlotDate() {
+		return slotDate;
+	}
+
+	public Time getSlotTime() {
+		return slotTime;
+	}
+
+	public void setSlotDate(String slotDate) {
+		this.slotDate = slotDate;
+	}
+
+	public void setSlotTime(Time slotTime) {
+		this.slotTime = slotTime;
+	}
+
+
+	
+
 
 	public int getBookingID() {
 		return bookingID;
@@ -40,11 +70,6 @@ public class Booking {
 		this.slotID = slotID;
 	}
 	
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+
 	
 }

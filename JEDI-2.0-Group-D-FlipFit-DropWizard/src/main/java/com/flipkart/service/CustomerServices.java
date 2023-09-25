@@ -1,5 +1,6 @@
 package com.flipkart.service;
 
+import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.dao.CustomerDao;
@@ -49,8 +50,9 @@ public class CustomerServices implements CustomerServicesInterface {
 
 	// View bookings of an user
 	@Override
-	public void viewBookings(Customer customer) {
-		dao.bookedGymList(customer.getCustomerID());
+	public List<Booking> viewBookings(int id) {
+
+		return dao.bookedGymList(id);
 	}
 
 	// Prints list of all gyms
@@ -61,23 +63,15 @@ public class CustomerServices implements CustomerServicesInterface {
 
 	// To book a slot
 	@Override
-	public void bookSlot(Customer customer) {
+	public void bookSlot(int slotId, int customerID, int gymID) {
 		try {
-			System.out.println("Enter the gymId to view slots.");
-			Scanner sc = new Scanner(System.in);
-			int gymId = sc.nextInt();
-			if(fetchSlots(gymId)==0){
-				return;
-			}
-			System.out.println("Enter the slotId to book slot.");
-			int slotId = sc.nextInt();
-			
+
 			if (dao.isFull(slotId)) {
 					throw new SlotFilledException();
-			} else if (dao.isAlreadyBooked(slotId, customer.getCustomerID())) {
+			} else if (dao.isAlreadyBooked(slotId, customerID)) {
 					throw new BookingExistsException();
 			} else {
-					dao.bookSlots(slotId, customer.getCustomerID());
+					dao.bookSlots(slotId, customerID, gymID);
 					System.out.println("Slot booked successfully!");		
 			}
 		}catch(Exception Ex) {

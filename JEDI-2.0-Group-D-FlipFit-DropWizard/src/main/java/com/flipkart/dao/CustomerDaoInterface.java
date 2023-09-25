@@ -1,10 +1,15 @@
 package com.flipkart.dao;
 
+import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.User;
 
+
 import java.util.ArrayList;
+
+import java.util.List;
+
 
 public interface CustomerDaoInterface {
 	/**
@@ -21,8 +26,11 @@ public interface CustomerDaoInterface {
 	public Customer getCustomerFromUserID(int userId);
 	/**
 	*This is Used to view profile of a particular Customer
+<<<<<<< Updated upstream
 	*This is Used to view profile of a particular Customer
- 	*@param Customer
+
+=======
+>>>>>>> Stashed changes
 	*/
 	public Customer viewProfile(int id);
 	/**
@@ -38,7 +46,7 @@ public interface CustomerDaoInterface {
  	*@param slotId
 	*This is Used to book slots for a particular slotId for a particular user
 	*/
-	public void bookSlots(int slotId, int customerId);
+	public void bookSlots(int slotId, int customerId, int gymID);
 	/**
 	*This is Used to check if the give slot of a gym has available seats or not
  	*@param slotId
@@ -56,6 +64,6 @@ public interface CustomerDaoInterface {
 	*This is Used to check all bookings of a customer
  	*@param custId
 	*/
-	public void bookedGymList(int custId);
+	public List<Booking> bookedGymList(int custId);
 
 }

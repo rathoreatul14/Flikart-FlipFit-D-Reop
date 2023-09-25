@@ -208,7 +208,7 @@ public class CustomerDao implements CustomerDaoInterface{
 	 * @param slotId     The ID of the slot to book.
 	 * @param customerId The ID of the customer.
 	 */
-	public void bookSlots(int slotId, int customerId) {
+	public void bookSlots(int slotId, int customerId, int gymID) {
 		// Connect to the database and book the slot for the customer
 		// Retrieve necessary details from the slot
 		// Insert the booking details into the database
@@ -320,7 +320,7 @@ public class CustomerDao implements CustomerDaoInterface{
 	 *
 	 * @param custId The ID of the customer.
 	 */
-	public void bookedGymList(int custId) {
+	public List<Booking> bookedGymList(int custId) {
 		// Connect to the database and fetch the list of slots booked by the customer
 		// Print the fetched slot details
 		// Handle any exceptions that occur
@@ -328,32 +328,26 @@ public class CustomerDao implements CustomerDaoInterface{
 		Connection conn = null;
 		PreparedStatement stmt = null;
 
+
 		try {
 			conn = DatabaseConnector.getConnection();
-			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_SLOTID_FOR_CUSTOMER);
+			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_BOOKING_FOR_CUSTOMER);
 			stmt.setInt(1, custId);
 			ResultSet output = stmt.executeQuery();
-			//System.out.println("\tSlotID\tGymID\tDay\ttime");
-			List<String> headers = new ArrayList<>();
-			headers.add("SlotID");
-			headers.add("GymID");
-			headers.add("Day");
-			headers.add("Time");
+			List<Booking> bookings = new ArrayList<>();
+			while(output.next()) {
 
-			List<List> data = new ArrayList<>();
+				int bookingID = output.getInt(1);
+				String slotDate = output.getString(2);
+				Time slotTime = output.getTime(3);
+				int customerID = output.getInt(4);
+				int slotID = output.getInt(5);
+				Booking booking = new Booking(bookingID, customerID, slotID, slotDate, slotTime);
+				bookings.add(booking);
 
-			while (output.next()) {
-				int slotId = output.getInt(5);
-				stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_SLOT_DETAILS_QUERY);
-				stmt.setInt(1, slotId);
-				ResultSet out = stmt.executeQuery();
-				while (out.next()) {
-//					System.out.println("\t " + out.getInt(1) + " \t " + out.getString(5) + "\t "
-//							+ out.getString(3) + "    " + out.getString(4) + ":00hrs");
-					data.add(List.of(out.getInt(1), out.getString(5), out.getString(3), out.getString(4)));
-				}
-				OutputFormatter.outputData(headers, data);
 			}
+
+			return bookings;
 
 		} catch (SQLException sqlExcep) {
 			System.out.println(sqlExcep);
@@ -361,7 +355,7 @@ public class CustomerDao implements CustomerDaoInterface{
 			excep.printStackTrace();
 			
 		}
-		return;
+		return null;
 	}
 	
 	/**

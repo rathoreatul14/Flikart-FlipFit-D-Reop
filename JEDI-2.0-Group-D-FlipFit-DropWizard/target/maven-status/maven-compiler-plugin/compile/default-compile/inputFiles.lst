@@ -31,5 +31,6 @@
 /Users/arjit.giri/Documents/IntelliJJavaProject/JEDI-2.0-Group-D-FlipFit-DropWizard/src/main/java/com/flipkart/dao/SlotDao.java
 /Users/arjit.giri/Documents/IntelliJJavaProject/JEDI-2.0-Group-D-FlipFit-DropWizard/src/main/java/com/flipkart/dao/SlotDaoInterface.java
 /Users/arjit.giri/Documents/IntelliJJavaProject/JEDI-2.0-Group-D-FlipFit-DropWizard/src/main/java/com/flipkart/service/GymOwnerServicesInterface.java
+/Users/arjit.giri/Documents/IntelliJJavaProject/JEDI-2.0-Group-D-FlipFit-DropWizard/src/main/java/com/flipkart/controller/CustomerController.java
 /Users/arjit.giri/Documents/IntelliJJavaProject/JEDI-2.0-Group-D-FlipFit-DropWizard/src/main/java/com/flipkart/constants/SQLConstants.java
 /Users/arjit.giri/Documents/IntelliJJavaProject/JEDI-2.0-Group-D-FlipFit-DropWizard/src/main/java/com/flipkart/exception/WrongGymOwnerIdException.java
