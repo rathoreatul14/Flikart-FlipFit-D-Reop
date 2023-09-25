@@ -12,6 +12,16 @@ public class GymOwner {
 	private String address;
 	private int userId;
 
+	private String password;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getAadharNumber() {
 		return aadharNumber;
 	}
@@ -44,7 +54,7 @@ public class GymOwner {
 		this.address = address;
 	}
 
-	public GymOwner(int id, String name, String status, String aadharNumber, String contactNumber, String address,int userId) {
+	public GymOwner(int id, String name, String status, String aadharNumber, String contactNumber, String address,int userId,String password) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -53,7 +63,19 @@ public class GymOwner {
 		this.contactNumber = contactNumber;
 		this.address = address;
 		this.userId = userId;
+		this.password=password;
 	}
+	public GymOwner(String name, String aadharNumber, String contactNumber, String address,String password) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.status = "Not Registered";
+		this.aadharNumber = aadharNumber;
+		this.contactNumber = contactNumber;
+		this.address = address;
+		this.password=password;
+	}
+
 
 	public GymOwner() {
 		// TODO Auto-generated constructor stub
@@ -80,6 +102,12 @@ public class GymOwner {
 	}
 
 	public void setStatus(String status) {
+		this.status = status;
+	}
+	public GymOwner(int id, String name, String status) {
+		super();
+		this.id = id;
+		this.name = name;
 		this.status = status;
 	}
 

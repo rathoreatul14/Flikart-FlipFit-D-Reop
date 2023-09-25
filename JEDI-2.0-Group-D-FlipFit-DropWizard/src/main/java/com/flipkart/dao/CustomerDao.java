@@ -21,7 +21,7 @@ public class CustomerDao implements CustomerDaoInterface{
 	 * @param user     The user information.
 	 * @param customer The customer information.
 	 */
-	public void registerCustomer(User user, Customer customer) {
+	public int registerCustomer(User user, Customer customer) {
 		// Connect to the database and register the customer
 		// Retrieve customer ID and register in the Customer schema
 		// Register in the CustomerRegistration schema
@@ -62,11 +62,13 @@ public class CustomerDao implements CustomerDaoInterface{
 			stmt.setInt(5, user1.getUserID());
 
 			stmt.executeUpdate();
+			return 1;
 		} catch (SQLException sqlExcep) {
 			System.out.println(sqlExcep);
 		} catch (Exception excep) {
 			excep.printStackTrace();
 		}
+		return 0;
 	}
 
 	public Customer getCustomerFromUserID(int userId) {
@@ -97,7 +99,7 @@ public class CustomerDao implements CustomerDaoInterface{
 		return null;
 	}
 
-	public void viewProfile(Customer customer) {
+	public Customer viewProfile(int id) {
 		// Connect to the database and fetch the list of all gyms
 		// Print Customer profile
 		// Handle any exceptions that occur
@@ -108,30 +110,23 @@ public class CustomerDao implements CustomerDaoInterface{
 		try {
 			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_CUSTOMER_QUERY);
-			stmt.setInt(1, customer.getCustomerID());
-
+			stmt.setInt(1, id);
 			ResultSet output = stmt.executeQuery();
-			List<String> headers = new ArrayList<>();
-	        headers.add("Name");
-	        headers.add("Address");
-	        headers.add("Email");
-
-	        List<List> data = new ArrayList<>();
 			while (output.next()) {
-				data.add(List.of(output.getString(2), output.getString(5), output.getString(4)));
+				 return new Customer(output.getInt(1), output.getString(2), output.getString(5), output.getInt(6), output.getString(3), output.getString(4),"*******");
 			}
-			OutputFormatter.outputData(headers, data);
 		} catch (SQLException sqlExcep) {
 			System.out.println(sqlExcep);
 		} catch (Exception excep) {
 			excep.printStackTrace();
 		}
+		return null;
 	}
 
 	/**
 	 * Fetches the list of all gyms from the database.
 	 */
-	public void fetchGymList() {
+	public ArrayList<Gym> fetchGymList() {
 		// Connect to the database and fetch the list of all gyms
 		// Print the fetched gym details
 		// Handle any exceptions that occur
@@ -144,27 +139,24 @@ public class CustomerDao implements CustomerDaoInterface{
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_GYM_QUERY);
 
 			ResultSet output = stmt.executeQuery();
-//			System.out.println("\tGymID\tName\tAddress");
-			List<String> headers = new ArrayList<>();
-	        headers.add("GymID");
-	        headers.add("Name");
-	        headers.add("Address");
+			ArrayList<Gym> gyms = new ArrayList<>();
 
-	        List<List> data = new ArrayList<>();
 			while (output.next()) {
-//				System.out.println(
-//						"\t " + output.getString(1) + "\t " + output.getString(2) + "\t " + output.getString(3));
-				data.add(List.of(output.getString(1), output.getString(2), output.getString(3)));
+				Gym gym = new Gym(output.getInt(1), output.getString(2), output.getString(3), output.getString(5), output.getInt(6));
+				gyms.add(gym);
 			}
-			OutputFormatter.outputData(headers, data);
-		} catch (SQLException sqlExcep) {
-//		       System.out.println(sqlExcep);
-		} catch (Exception excep) {
-			excep.printStackTrace();
-		}
+			return gyms;
+
+			} catch (SQLException sqlExcep) {
+			   System.out.println(sqlExcep);
+			} catch (Exception excep) {
+				excep.printStackTrace();
+			}
+		return new ArrayList<Gym>();
 	}
 
-	/**
+
+        /**
 	 * Fetches the list of available slots for a given gym from the database.
 	 *
 	 * @param gymId The ID of the gym.

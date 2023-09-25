@@ -3,54 +3,40 @@
  */
 package com.flipkart.dao;
 
+import com.flipkart.bean.*;
+
+import java.util.ArrayList;
+
+
 /**
  * 
  */
 public interface AdminDaoInterface {
 
-	/**
-	 * Method to get Admin Details
-	 * @param userName
-	 * 
-	 */
-
-	void fetchProfile(String userName);
-	/**
-	 * Method to Update Admin Password
-	 * @param userName
-	 * @param Password
-	 */
-
-
-	void updatePassword(String userName, String Password);
 
 	/**
 	 * Method to View all Approved Gyms
 	 * 
 	 */
 
-	void viewAllGyms();
+	ArrayList<Gym> viewAllGyms();
 
 	/**
 	 * Method to View all Approved GymOwners
 	 * 
 	 */
 
-	void viewAllGymOwners();
+	ArrayList<GymOwner> viewAllGymOwners();
 
-	/**
-	 * Method to Approve new GymOwner 
-	 * @param GymOwnerId
-	 * 
-	 */
+
+	ArrayList<GymOwner> viewPendingGymOwner();
+
+
+	ArrayList<Gym> viewPendingGym();
 
 	void approveGymOwner(int id);
 
-	/**
-	 * Method to Approve new Gym
-	 * @param GymId
-	 * 
-	 */
+
 
 	void approveGym(int id);
 
@@ -59,43 +45,20 @@ public interface AdminDaoInterface {
 	 * 
 	 */
 
-	void viewPendingGymOwner();
 
-	/**
-	 * Method to View all pending gyms for approval 
-	 * @param GymOwnerId
-	 * 
-	 */
 
-	void viewPendingGym();
-	/**
-	 * Method to handle wrongGymownerId
-	 * @param GymOwnerId
-	 * @return True or False
-	 */
+
 
 	boolean wrongGymOwnerId(int id);
-	/**
-	 * Method to view all approved gyms
-	 * @param AdminId
-	 * @return True or False
-	 */
+
 
 	boolean alreadyApprovedGymOwner(int id);
 
-	/**
-	 * Method to view all approved gyms
-	 * @param GymId
-	 * @return True or False
-	 */
+
 
 
 	boolean wrongGymId(int id);
-	/**
-	 * Method to view all approved gyms
-	 * @param GymId
-	 * @return True or False
-	 */
+
 	boolean alreadyApprovedGym(int id);
 	
 }
